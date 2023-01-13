@@ -30,9 +30,9 @@ public class WorkOrder implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate deliveryDate;
 
-	private OrderStatus orderStatus;
+	private Integer orderStatus;
 
-	private OrderPriority orderPriority;
+	private Integer orderPriority;
 
 	private String generalContractor;
 
@@ -47,16 +47,15 @@ public class WorkOrder implements Serializable {
 	public WorkOrder() {
 	}
 
-	public WorkOrder(Long id, LocalDate startDate, LocalDate expectDate, LocalDate deliveryDate,
+	public WorkOrder(Long id, LocalDate expectDate, LocalDate deliveryDate,
 			OrderStatus orderStatus, OrderPriority orderPriority, String generalContractor, String jobSite,
 			String address, String city, String description) {
 		super();
 		this.id = id;
-		this.startDate = startDate;
 		this.expectDate = expectDate;
 		this.deliveryDate = deliveryDate;
-		this.orderStatus = orderStatus;
-		this.orderPriority = orderPriority;
+		setOrderStatus(orderStatus);
+		setOrderPriority(orderPriority);
 		this.generalContractor = generalContractor;
 		this.jobSite = jobSite;
 		this.address = address;
@@ -97,19 +96,23 @@ public class WorkOrder implements Serializable {
 	}
 
 	public OrderStatus getOrderStatus() {
-		return orderStatus;
+		return OrderStatus.valueOf(orderStatus);
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
+		if (orderStatus != null) {
+			this.orderStatus = orderStatus.getCode();
+		}
 	}
-
+	
 	public OrderPriority getOrderPriority() {
-		return orderPriority;
+		return OrderPriority.valueOf(orderPriority);
 	}
 
 	public void setOrderPriority(OrderPriority orderPriority) {
-		this.orderPriority = orderPriority;
+		if (orderPriority != null) {
+			this.orderPriority = orderPriority.getCode();
+		}
 	}
 
 	public String getGeneralContractor() {
