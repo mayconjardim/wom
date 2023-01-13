@@ -33,4 +33,26 @@ public class WorkOrderService {
 		return new WorkOrderDTO(entity); 
 	}
 	
+	@Transactional
+	public WorkOrderDTO insert(WorkOrderDTO dto) {
+		WorkOrder entity = new WorkOrder(); 
+		copyDtoEntity(dto, entity);
+		entity = orderRepository.save(entity); 
+		return new WorkOrderDTO(entity); 
+	}
+	
+	
+	private void copyDtoEntity(WorkOrderDTO dto, WorkOrder entity) {
+		entity.setStartDate(dto.getStartDate());
+		entity.setExpectDate(dto.getExpectDate());
+		entity.setDeliveryDate(dto.getDeliveryDate());
+		entity.setOrderStatus(dto.getOrderStatus());
+		entity.setOrderPriority(dto.getOrderPriority());
+		entity.setGeneralContractor(dto.getGeneralContractor());
+		entity.setJobSite(dto.getJobSite());
+		entity.setAddress(dto.getAddress());
+		entity.setCity(dto.getCity());
+		entity.setDescription(dto.getDescription());	
+	}
+	
 }

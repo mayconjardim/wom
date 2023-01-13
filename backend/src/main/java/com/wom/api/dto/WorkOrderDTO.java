@@ -11,6 +11,8 @@ import com.wom.api.entities.enums.OrderStatus;
 public class WorkOrderDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
+
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate = LocalDate.now();
 
@@ -37,10 +39,11 @@ public class WorkOrderDTO implements Serializable {
 	public WorkOrderDTO() {
 	}
 
-	public WorkOrderDTO(LocalDate startDate, LocalDate expectDate, LocalDate deliveryDate, Integer orderStatus,
+	public WorkOrderDTO(Long id, LocalDate startDate, LocalDate expectDate, LocalDate deliveryDate, Integer orderStatus,
 			Integer orderPriority, String generalContractor, String jobSite, String address, String city,
 			String description) {
 		super();
+		this.id = id;
 		this.startDate = startDate;
 		this.expectDate = expectDate;
 		this.deliveryDate = deliveryDate;
@@ -54,6 +57,7 @@ public class WorkOrderDTO implements Serializable {
 	}
 
 	public WorkOrderDTO(WorkOrder entity) {
+		id = entity.getId();
 		startDate = entity.getStartDate();
 		expectDate = entity.getExpectDate();
 		deliveryDate = entity.getDeliveryDate();
@@ -64,6 +68,14 @@ public class WorkOrderDTO implements Serializable {
 		address = entity.getAddress();
 		city = entity.getCity();
 		description = entity.getDescription();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public LocalDate getStartDate() {
