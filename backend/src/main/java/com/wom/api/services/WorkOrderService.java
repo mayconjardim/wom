@@ -13,35 +13,49 @@ import com.wom.api.entities.WorkOrder;
 import com.wom.api.repositories.WorkOrderRepository;
 import com.wom.api.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class WorkOrderService {
 
 	@Autowired
 	private WorkOrderRepository orderRepository;
-	
+
 	@Transactional(readOnly = true)
 	public Page<WorkOrderDTO> findAllPaged(Pageable pageable) {
-		Page<WorkOrder> page = orderRepository.findAll(pageable); 
-		return page.map(order -> new WorkOrderDTO(order)); 
+		Page<WorkOrder> page = orderRepository.findAll(pageable);
+		return page.map(order -> new WorkOrderDTO(order));
 
 	}
-	
+
 	@Transactional(readOnly = true)
 	public WorkOrderDTO findById(Long id) {
-		Optional<WorkOrder> obj = orderRepository.findById(id); 
-		WorkOrder entity = obj.orElseThrow(() -> new ResourceNotFoundException(" Id não existe")); 
-		return new WorkOrderDTO(entity); 
+		Optional<WorkOrder> obj = orderRepository.findById(id);
+		WorkOrder entity = obj.orElseThrow(() -> new ResourceNotFoundException(" Id não existe"));
+		return new WorkOrderDTO(entity);
 	}
-	
+
 	@Transactional
 	public WorkOrderDTO insert(WorkOrderDTO dto) {
-		WorkOrder entity = new WorkOrder(); 
+		WorkOrder entity = new WorkOrder();
 		copyDtoEntity(dto, entity);
-		entity = orderRepository.save(entity); 
-		return new WorkOrderDTO(entity); 
+		entity = orderRepository.save(entity);
+		return new WorkOrderDTO(entity);
 	}
-	
-	
+
+	@Transactional
+	public WorkOrderDTO update(Long id, WorkOrderDTO dto) {
+
+		try {
+			WorkOrder entity = orderRepository.getReferenceById(id);
+			copyDtoEntity(dto, entity);
+			entity = orderRepository.save(entity);
+			return new WorkOrderDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found! " + id);
+		}
+	}
+
 	private void copyDtoEntity(WorkOrderDTO dto, WorkOrder entity) {
 		entity.setStartDate(dto.getStartDate());
 		entity.setExpectDate(dto.getExpectDate());
@@ -52,7 +66,7 @@ public class WorkOrderService {
 		entity.setJobSite(dto.getJobSite());
 		entity.setAddress(dto.getAddress());
 		entity.setCity(dto.getCity());
-		entity.setDescription(dto.getDescription());	
+		entity.setDescription(dto.getDescription());
 	}
-	
+
 }
