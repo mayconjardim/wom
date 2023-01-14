@@ -33,32 +33,28 @@ public class WorkOrderResource {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<WorkOrderDTO> findById(@PathVariable Long id){ 
+	public ResponseEntity<WorkOrderDTO> findById(@PathVariable Long id) {
 		WorkOrderDTO dto = orderSevice.findById(id);
-		return ResponseEntity.ok().body(dto); 
+		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<WorkOrderDTO> insert(@RequestBody WorkOrderDTO dto){
+	public ResponseEntity<WorkOrderDTO> insert(@RequestBody WorkOrderDTO dto) {
 		dto = orderSevice.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
-		buildAndExpand(dto.getId()).toUri(); 
-		return ResponseEntity.created(uri).body(dto); 
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
 	}
-	
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<WorkOrderDTO> update(@PathVariable Long id, @RequestBody WorkOrderDTO dto){
-		dto = orderSevice.update(id, dto); 
-		return ResponseEntity.ok().body(dto); 
+	public ResponseEntity<WorkOrderDTO> update(@PathVariable Long id, @RequestBody WorkOrderDTO dto) {
+		dto = orderSevice.update(id, dto);
+		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<WorkOrderDTO> delete(@PathVariable Long id){
+	public ResponseEntity<WorkOrderDTO> delete(@PathVariable Long id) {
 		orderSevice.delete(id);
-		return ResponseEntity.noContent().build(); 	
+		return ResponseEntity.noContent().build();
 	}
-	
-	
-	
+
 }

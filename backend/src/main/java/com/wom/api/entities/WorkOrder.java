@@ -2,16 +2,22 @@ package com.wom.api.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wom.api.entities.enums.OrderPriority;
 import com.wom.api.entities.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class WorkOrder implements Serializable {
@@ -44,12 +50,16 @@ public class WorkOrder implements Serializable {
 
 	private String description;
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "order_user", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<User> orders = new HashSet<>();
+
 	public WorkOrder() {
 	}
 
-	public WorkOrder(Long id, LocalDate expectDate, LocalDate deliveryDate,
-			OrderStatus orderStatus, OrderPriority orderPriority, String generalContractor, String jobSite,
-			String address, String city, String description) {
+	public WorkOrder(Long id, LocalDate expectDate, LocalDate deliveryDate, OrderStatus orderStatus,
+			OrderPriority orderPriority, String generalContractor, String jobSite, String address, String city,
+			String description) {
 		super();
 		this.id = id;
 		this.expectDate = expectDate;
@@ -104,7 +114,7 @@ public class WorkOrder implements Serializable {
 			this.orderStatus = orderStatus.getCode();
 		}
 	}
-	
+
 	public OrderPriority getOrderPriority() {
 		return OrderPriority.valueOf(orderPriority);
 	}
@@ -153,6 +163,10 @@ public class WorkOrder implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<User> getOrders() {
+		return orders;
 	}
 
 	@Override

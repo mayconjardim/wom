@@ -2,8 +2,11 @@ package com.wom.api.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.wom.api.entities.User;
 import com.wom.api.entities.WorkOrder;
 import com.wom.api.entities.enums.OrderPriority;
 import com.wom.api.entities.enums.OrderStatus;
@@ -35,6 +38,8 @@ public class WorkOrderDTO implements Serializable {
 	private String city;
 
 	private String description;
+
+	private Set<UserDTO> users = new HashSet<>();
 
 	public WorkOrderDTO() {
 	}
@@ -68,6 +73,11 @@ public class WorkOrderDTO implements Serializable {
 		address = entity.getAddress();
 		city = entity.getCity();
 		description = entity.getDescription();
+	}
+
+	public WorkOrderDTO(WorkOrder entity, Set<User> users) {
+		this(entity);
+		users.forEach(user -> this.users.add(new UserDTO(user)));
 	}
 
 	public Long getId() {
@@ -160,6 +170,10 @@ public class WorkOrderDTO implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<UserDTO> getUsers() {
+		return users;
 	}
 
 }
