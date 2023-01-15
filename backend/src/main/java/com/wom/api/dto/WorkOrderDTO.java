@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.wom.api.entities.User;
 import com.wom.api.entities.WorkOrder;
 import com.wom.api.entities.enums.OrderPriority;
 import com.wom.api.entities.enums.OrderStatus;
@@ -73,12 +72,10 @@ public class WorkOrderDTO implements Serializable {
 		address = entity.getAddress();
 		city = entity.getCity();
 		description = entity.getDescription();
+		entity.getUsers().forEach(user -> this.users.add(new UserDTO(user)));
 	}
 
-	public WorkOrderDTO(WorkOrder entity, Set<User> users) {
-		this(entity);
-		users.forEach(user -> this.users.add(new UserDTO(user)));
-	}
+	
 
 	public Long getId() {
 		return id;

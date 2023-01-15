@@ -52,7 +52,7 @@ public class WorkOrder implements Serializable {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "order_user", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private Set<User> orders = new HashSet<>();
+	private Set<User> users = new HashSet<>();
 
 	public WorkOrder() {
 	}
@@ -165,8 +165,8 @@ public class WorkOrder implements Serializable {
 		this.description = description;
 	}
 
-	public Set<User> getOrders() {
-		return orders;
+	public Set<User> getUsers() {
+		return users;
 	}
 
 	@Override
