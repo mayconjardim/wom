@@ -34,7 +34,7 @@ public class WorkOrderService {
 	@Transactional(readOnly = true)
 	public WorkOrderDTO findById(Long id) {
 		Optional<WorkOrder> obj = orderRepository.findById(id);
-		WorkOrder entity = obj.orElseThrow(() -> new ResourceNotFoundException(" Id não existe"));
+		WorkOrder entity = obj.orElseThrow(() -> new ResourceNotFoundException(" Id not found: " + id));
 		return new WorkOrderDTO(entity);
 	}
 
@@ -55,7 +55,7 @@ public class WorkOrderService {
 			entity = orderRepository.save(entity);
 			return new WorkOrderDTO(entity);
 		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Id not found! " + id);
+			throw new ResourceNotFoundException("Id not found: " + id);
 		}
 	}
 
@@ -63,7 +63,7 @@ public class WorkOrderService {
 		try {
 			orderRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
-			throw new ResourceNotFoundException("Id not found! " + id);
+			throw new ResourceNotFoundException("Id not found: " + id);
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException("Database integrity violation!");
 		}
