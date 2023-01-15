@@ -75,8 +75,6 @@ public class WorkOrderDTO implements Serializable {
 		entity.getUsers().forEach(user -> this.users.add(new UserDTO(user)));
 	}
 
-	
-
 	public Long getId() {
 		return id;
 	}
