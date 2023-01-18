@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import com.wom.api.entities.User;
 
 public class UserDTO implements Serializable {
@@ -11,10 +14,13 @@ public class UserDTO implements Serializable {
 
 	private Long id;
 
+	@NotBlank(message = "Required field")
 	private String firstName;
 
+	@NotBlank(message = "Required field")
 	private String lastName;
 
+	@Email(message = "Please enter a valid email")
 	private String email;
 
 	private String phoneNumber;

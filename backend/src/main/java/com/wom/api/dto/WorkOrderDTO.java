@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wom.api.entities.WorkOrder;
 import com.wom.api.entities.enums.OrderPriority;
@@ -24,8 +26,10 @@ public class WorkOrderDTO implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate deliveryDate;
 
+	@NotNull
 	private Integer orderStatus;
 
+	@NotNull
 	private Integer orderPriority;
 
 	private String generalContractor;
