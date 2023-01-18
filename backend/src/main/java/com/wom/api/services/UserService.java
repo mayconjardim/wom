@@ -5,6 +5,8 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +23,7 @@ import com.wom.api.entities.Role;
 import com.wom.api.entities.User;
 import com.wom.api.repositories.RoleRepository;
 import com.wom.api.repositories.UserRepository;
+import com.wom.api.services.exceptions.DatabaseException;
 import com.wom.api.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -65,13 +68,23 @@ public class UserService implements UserDetailsService {
 			copyDtoEntity(dto, entity);
 
 			if (!dto.getPassword().equals(entity.getPassword())) {
-				dto.setPassword(encoder.encode(dto.getPassword()));
+				entity.setPassword(encoder.encode(dto.getPassword()));
 			}
 
 			entity = userRepository.save(entity);
 			return new UserDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found: " + id);
+		}
+	}
+
+	public void delete(Long id) {
+		try {
+			userRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id not found: " + id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException("Database integrity violation!");
 		}
 	}
 
