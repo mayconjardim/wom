@@ -2,6 +2,8 @@ package com.wom.api.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,15 +57,33 @@ public class UserService implements UserDetailsService {
 		return new UserDTO(entity);
 	}
 
+	@Transactional
+	public UserDTO update(Long id, UserInsertDTO dto) {
+
+		try {
+			User entity = userRepository.getReferenceById(id);
+			copyDtoEntity(dto, entity);
+
+			if (!dto.getPassword().equals(entity.getPassword())) {
+				dto.setPassword(encoder.encode(dto.getPassword()));
+			}
+
+			entity = userRepository.save(entity);
+			return new UserDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found: " + id);
+		}
+	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(username);
-		if(user == null) {
+		if (user == null) {
 			throw new UsernameNotFoundException("E-mail not found!");
 		}
 		return user;
 	}
-	
+
 	private void copyDtoEntity(UserDTO dto, User entity) {
 		entity.setFirstName(dto.getFirstName());
 		entity.setLastName(dto.getLastName());

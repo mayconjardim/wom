@@ -12,19 +12,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wom.api.dto.UserDTO;
 import com.wom.api.dto.WorkOrderDTO;
+import com.wom.api.entities.User;
 import com.wom.api.entities.WorkOrder;
+import com.wom.api.repositories.UserRepository;
 import com.wom.api.repositories.WorkOrderRepository;
 import com.wom.api.services.exceptions.DatabaseException;
 import com.wom.api.services.exceptions.ResourceNotFoundException;
-
-
 
 @Service
 public class WorkOrderService {
 
 	@Autowired
 	private WorkOrderRepository orderRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	@Transactional(readOnly = true)
 	public Page<WorkOrderDTO> findAllPaged(Pageable pageable) {
@@ -82,6 +86,13 @@ public class WorkOrderService {
 		entity.setAddress(dto.getAddress());
 		entity.setCity(dto.getCity());
 		entity.setDescription(dto.getDescription());
+
+		entity.getUsers().clear();
+		for (UserDTO userDto : dto.getUsers()) {
+			User user = userRepository.getReferenceById(userDto.getId());
+			entity.getUsers().add(user);
+		}
+
 	}
 
 }
