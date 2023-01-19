@@ -1,7 +1,26 @@
+.toolbar {
+  mat-icon {
+    margin-right: 0.2rem;
+  }
+
+  &-spacer {
+    flex: 1 1 auto;
+  }
+}
+
 .sidenav {
   height: 100%;
 
   &-area {
     width: 13rem;
+
+    &-menu {
+      margin: 10px;
+
+      mat-icon {
+        margin-right: 10px;
+        vertical-align: text-bottom;
+      }
+    }
   }
 }

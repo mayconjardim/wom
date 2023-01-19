@@ -31,6 +31,7 @@ import { map, Observable } from 'rxjs';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
+  title = 'home';
   @ViewChild('drawer') drawer: any;
 
   public isHandset$: Observable<boolean> = this.breakpointObserver
