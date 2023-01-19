@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+</mat-toolbar>
+
+<mat-drawer-container class="sidenav" autosize>
+  <mat-drawer
+    #drawer
+    color="primary"
+    class="sidenav-area mat-elevation-z8"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+    mode="side"
+    [opened]="isMenuOpen"
+  >
+    <mat-nav-list class="sidenav-area-menu">
+      <a mat-list-item routerLink="home"><mat-icon>home</mat-icon>Home</a>
+      <a mat-list-item routerLink="home"><mat-icon>home</mat-icon>Home</a>
+      <a mat-list-item routerLink="home"><mat-icon>home</mat-icon>Home</a>
+      <a mat-list-item routerLink="home"><mat-icon>home</mat-icon>Home</a>
+      <a mat-list-item routerLink="home"><mat-icon>home</mat-icon>Home</a>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
