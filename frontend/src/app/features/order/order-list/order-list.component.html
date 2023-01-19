@@ -1,1 +1,50 @@
-<p>order-list works!</p>
+<div class="container">
+  <div class="container-order">
+    <mat-accordion>
+      <mat-expansion-panel
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+        class="mat-elevation-z8"
+        *ngFor="let item of dataSource"
+      >
+        <mat-expansion-panel-header
+          [collapsedHeight]="'5rem'"
+          [expandedHeight]="'6rem'"
+        >
+          <table class="container-order-table">
+            <caption>
+              #{{
+                item.position
+              }}
+            </caption>
+            <tr>
+              <th>GC</th>
+              <td>{{ item.name }}</td>
+              <th>Start Date</th>
+              <td>2023-01-18</td>
+              <td><img src="assets/icons/open.svg" /></td>
+            </tr>
+            <tr>
+              <th>Project Manager</th>
+              <td>Shaquille O'Neal</td>
+              <th>Expected Date</th>
+              <td>{{ item.weight }}</td>
+              <td><img src="assets/icons/high.svg" /></td>
+            </tr>
+            <tr>
+              <th>Yard</th>
+              <td>Travis Wilson</td>
+              <th>Delivery Date</th>
+              <td>{{ item.symbol }}</td>
+            </tr>
+          </table>
+        </mat-expansion-panel-header>
+        <div class="container-order-actions">
+          <p><mat-icon>preview</mat-icon></p>
+          <p><mat-icon>print</mat-icon></p>
+          <p><mat-icon>delete</mat-icon></p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

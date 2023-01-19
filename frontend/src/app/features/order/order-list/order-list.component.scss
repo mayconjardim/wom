@@ -1,0 +1,36 @@
+.container {
+  width: 98%;
+  margin: 1rem auto;
+
+  &-order {
+    width: 100%;
+
+    mat-expansion-panel {
+      margin: 0.5rem auto;
+    }
+
+    &-table {
+      caption {
+        margin-top: 0.5rem;
+        text-align: left;
+        color: green;
+      }
+
+      width: 100%;
+      font-size: 10px;
+      text-align: left;
+
+      img {
+        height: 9px;
+      }
+    }
+
+    &-actions {
+      display: flex;
+      justify-content: center;
+      p {
+        margin: 0 1rem;
+      }
+    }
+  }
+}
