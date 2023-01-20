@@ -11,7 +11,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { OrderListComponent } from './order-list/order-list.component';
 
-export const routes: Routes = [{ path: '', component: OrderListComponent }];
+export const routes: Routes = [
+  { path: 'orders', component: OrderListComponent },
+];
 
 @NgModule({
   declarations: [OrderListComponent],
