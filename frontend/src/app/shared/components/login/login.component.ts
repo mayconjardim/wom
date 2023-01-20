@@ -12,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 import { Credentials } from '../../models/credentials';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'login',
@@ -30,17 +33,22 @@ import { Credentials } from '../../models/credentials';
 })
 export class LoginComponent {
   creds: Credentials = {
-    email: '',
+    username: '',
     password: '',
   };
 
-  email = new FormControl(null, Validators.email);
+  username = new FormControl(null, Validators.email);
   password = new FormControl(null, Validators.minLength(5));
 
+  constructor(private toast: ToastrService, private authService: AuthService) {}
+
+  login() {
+    this.authService.authenticate(this.creds).subscribe((response: any) => {
+      this.authService.successfulLogin(response['access_token']);
+    });
+  }
+
   validForm(): boolean {
-    if (this.email.valid && this.password.valid) {
-      return true;
-    }
-    return false;
+    return this.username.valid && this.password.valid;
   }
 }

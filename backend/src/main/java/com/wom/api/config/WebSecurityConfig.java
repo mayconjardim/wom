@@ -33,6 +33,8 @@ public class WebSecurityConfig {
 	JwtTokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());
 	}
+	
+	
 
 	@Bean
 	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

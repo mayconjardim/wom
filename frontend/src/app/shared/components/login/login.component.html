@@ -5,14 +5,16 @@
 
       <mat-form-field class="full-width">
         <input
-          [formControl]="email"
-          [(ngModel)]="creds.email"
+          [formControl]="username"
+          [(ngModel)]="creds.username"
           required
-          name="email"
+          name="username"
           matInput
           placeholder="Email"
         />
       </mat-form-field>
+
+      {{ creds.username }}
 
       <mat-form-field class="full-width">
         <input
@@ -27,8 +29,10 @@
       </mat-form-field>
     </mat-card-content>
 
+    {{ creds.password }}
     <mat-card-actions>
       <button
+        (click)="login()"
         [disabled]="!validForm()"
         class="full-width"
         mat-raised-button

@@ -33,8 +33,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private JwtTokenStore tokenStore;
 	
-	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
-	private static final String[] MANAGER_OR_ADMIN_OR_YARD = {"/orders/**"};
+	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**", "/orders/**" };
+	private static final String[] MANAGER_OR_ADMIN_OR_YARD = {};
 	private static final String[] ADMIN = {"/users/**"};
 	private static final String[] USER = {"/users"};
 
@@ -53,7 +53,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll() 
-		.antMatchers(HttpMethod.POST, USER).permitAll() 
+		.antMatchers(HttpMethod.POST, USER).permitAll()
+		.antMatchers(HttpMethod.GET, USER).permitAll()
 		.antMatchers(HttpMethod.GET, MANAGER_OR_ADMIN_OR_YARD).permitAll() 
 		.antMatchers(HttpMethod.POST, MANAGER_OR_ADMIN_OR_YARD).permitAll()
 		.antMatchers(HttpMethod.PUT, MANAGER_OR_ADMIN_OR_YARD).permitAll() 
@@ -65,21 +66,18 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	}
 	
 	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-
-		String[] origins = corsOrigins.split(",");
-
-	    CorsConfiguration corsConfig = new CorsConfiguration();
-	    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
-	    corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
-	    corsConfig.setAllowCredentials(true);
-	    corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-	 
-	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	    source.registerCorsConfiguration("/**", corsConfig);
-	    return source;
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration corsConfig  = new CorsConfiguration();
+		corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
+		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
+		corsConfig.setAllowCredentials(true);
+		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "*"));
+		
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", corsConfig);
+		return source;
 	}
-
+	
 	@Bean
 	FilterRegistrationBean<CorsFilter> corsFilter() {
 	    FilterRegistrationBean<CorsFilter> bean
