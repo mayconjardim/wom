@@ -1,9 +1,17 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+
+import { Credentials } from '../../models/credentials';
 
 @Component({
   selector: 'login',
@@ -14,8 +22,25 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {}
+export class LoginComponent {
+  creds: Credentials = {
+    email: '',
+    password: '',
+  };
+
+  email = new FormControl(null, Validators.email);
+  password = new FormControl(null, Validators.minLength(5));
+
+  validForm(): boolean {
+    if (this.email.valid && this.password.valid) {
+      return true;
+    }
+    return false;
+  }
+}
