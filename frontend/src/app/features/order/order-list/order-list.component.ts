@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-order-list',
@@ -6,8 +6,8 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./order-list.component.scss'],
 })
 export class OrderListComponent {
+  orders = ELEMENT_DATA;
   panelOpenState = false;
-  dataSource = ELEMENT_DATA;
 
   priorityColor(priority: string) {
     if (priority == 'LOW') {
@@ -18,21 +18,126 @@ export class OrderListComponent {
   }
 }
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  id: number;
+  startDate: string;
+  expectDate: string;
+  deliveryDate: string;
+  orderStatus: string;
+  orderPriority: string;
+  generalContractor: string;
+  manager: string;
+  yard: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+  {
+    id: 1,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '2023-01-19',
+    orderStatus: 'CLOSED',
+    orderPriority: 'LOW',
+    generalContractor: 'LeBron James',
+    manager: 'Kevin Durant',
+    yard: 'Jason Tatum',
+  },
+  {
+    id: 2,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '2023-01-19',
+    orderStatus: 'PROCESSING',
+    orderPriority: 'HIGH',
+    generalContractor: 'Shareef Abdur-Rahim',
+    manager: 'Shaquille O Neal',
+    yard: 'Jason Tatum',
+  },
+  {
+    id: 3,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '2023-01-19',
+    orderStatus: 'OPEN',
+    orderPriority: 'LOW',
+    generalContractor: 'LeBron James',
+    manager: 'Kevin Durant',
+    yard: 'Jason Tatum',
+  },
+  {
+    id: 4,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '',
+    orderStatus: 'PROCESSING',
+    orderPriority: 'HIGH',
+    generalContractor: 'LeBron James',
+    manager: 'Kevin Durant',
+    yard: 'Jason Tatum',
+  },
+  {
+    id: 5,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '2023-01-19',
+    orderStatus: 'CLOSED',
+    orderPriority: 'LOW',
+    generalContractor: 'LeBron James',
+    manager: 'Kevin Durant',
+    yard: 'Jason Tatum',
+  },
+  {
+    id: 6,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '',
+    orderStatus: 'OPEN',
+    orderPriority: 'MEDIUM',
+    generalContractor: 'LeBron James',
+    manager: 'Kevin Durant',
+    yard: 'Jason Tatum',
+  },
+  {
+    id: 7,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '2023-01-19',
+    orderStatus: 'PROCESSING',
+    orderPriority: 'MEDIUM',
+    generalContractor: 'LeBron James',
+    manager: 'Kevin Durant',
+    yard: 'Jason Tatum',
+  },
+  {
+    id: 8,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '',
+    orderStatus: 'OPEN',
+    orderPriority: 'LOW',
+    generalContractor: 'LeBron James',
+    manager: 'Kevin Durant',
+    yard: 'Jason Tatum',
+  },
+  {
+    id: 9,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '2023-01-19',
+    orderStatus: 'CLOSED',
+    orderPriority: 'LOW',
+    generalContractor: 'LeBron James',
+    manager: 'Kevin Durant',
+    yard: 'Jason Tatum',
+  },
+  {
+    id: 10,
+    startDate: '2023-01-19',
+    expectDate: '2023-01-19',
+    deliveryDate: '2023-01-19',
+    orderStatus: 'CLOSED',
+    orderPriority: 'HIGH',
+    generalContractor: 'LeBron James',
+    manager: 'Kevin Durant',
+    yard: 'Jason Tatum',
+  },
 ];
