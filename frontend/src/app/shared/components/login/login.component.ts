@@ -43,9 +43,14 @@ export class LoginComponent {
   constructor(private toast: ToastrService, private authService: AuthService) {}
 
   login() {
-    this.authService.authenticate(this.creds).subscribe((response: any) => {
-      this.authService.successfulLogin(response['access_token']);
-    });
+    this.authService.authenticate(this.creds).subscribe(
+      (response: any) => {
+        this.authService.successfulLogin(response['access_token']);
+      },
+      () => {
+        this.toast.error('Email or password invalid!');
+      }
+    );
   }
 
   validForm(): boolean {
