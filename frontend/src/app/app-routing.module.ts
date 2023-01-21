@@ -1,4 +1,4 @@
-import { AuthGuard } from 'src/app/core/guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -10,6 +10,7 @@ const routes: Routes = [
 
   {
     path: '',
+    canActivateChild: [AuthGuard],
     component: SidenavComponent,
     children: [
       {

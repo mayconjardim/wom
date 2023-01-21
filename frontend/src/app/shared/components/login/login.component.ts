@@ -43,7 +43,9 @@ export class LoginComponent {
     private toast: ToastrService,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    console.log('vasco' + authService.isAuthenticated());
+  }
 
   login() {
     this.authService.authenticate(this.creds).subscribe(
