@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +39,9 @@ public class WorkOrderResource {
 		return ResponseEntity.ok().body(dto);
 	}
 
+	
 	@PostMapping
+	@Secured(value = {"ROLE_MANAGER", "ROLE_ADMIN"})
 	public ResponseEntity<WorkOrderDTO> insert(@RequestBody WorkOrderDTO dto) {
 		dto = orderSevice.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
@@ -46,12 +49,14 @@ public class WorkOrderResource {
 	}
 
 	@PutMapping(value = "/{id}")
+	@Secured(value = {"ROLE_YARD", "ROLE_MANAGER", "ROLE_ADMIN"})
 	public ResponseEntity<WorkOrderDTO> update(@PathVariable Long id, @RequestBody WorkOrderDTO dto) {
 		dto = orderSevice.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
 
 	@DeleteMapping(value = "/{id}")
+	@Secured(value = {"ROLE_MANAGER", "ROLE_ADMIN"})
 	public ResponseEntity<WorkOrderDTO> delete(@PathVariable Long id) {
 		orderSevice.delete(id);
 		return ResponseEntity.noContent().build();

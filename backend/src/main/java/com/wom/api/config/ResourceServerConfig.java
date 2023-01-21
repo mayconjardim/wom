@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -22,6 +22,7 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableResourceServer
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Value("${cors.origins}")
@@ -29,14 +30,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Autowired
 	private Environment env;
-	
+
 	@Autowired
 	private JwtTokenStore tokenStore;
-	
-	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**", "/orders/**" };
-	private static final String[] MANAGER_OR_ADMIN_OR_YARD = {};
-	private static final String[] ADMIN = {"/users/**"};
-	private static final String[] USER = {"/users"};
+
+	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**", };
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -46,43 +44,33 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 
-		
 		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
 			http.headers().frameOptions().disable();
 		}
-		
-		http.authorizeRequests()
-		.antMatchers(PUBLIC).permitAll() 
-		.antMatchers(HttpMethod.POST, USER).permitAll()
-		.antMatchers(HttpMethod.GET, USER).permitAll()
-		.antMatchers(HttpMethod.GET, MANAGER_OR_ADMIN_OR_YARD).permitAll() 
-		.antMatchers(HttpMethod.POST, MANAGER_OR_ADMIN_OR_YARD).permitAll()
-		.antMatchers(HttpMethod.PUT, MANAGER_OR_ADMIN_OR_YARD).permitAll() 
-		.antMatchers(MANAGER_OR_ADMIN_OR_YARD).hasAnyRole("MANAGER", "ADMIN", "YARD") 
-		.antMatchers(ADMIN).hasRole("ADMIN") 
-		.anyRequest().authenticated(); 
-		
+
+		http.authorizeRequests().antMatchers(PUBLIC).permitAll().anyRequest().authenticated();
+
 		http.cors().configurationSource(corsConfigurationSource());
 	}
-	
+
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration corsConfig  = new CorsConfiguration();
+		CorsConfiguration corsConfig = new CorsConfiguration();
 		corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
 		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
 		corsConfig.setAllowCredentials(true);
 		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "*"));
-		
+
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", corsConfig);
 		return source;
 	}
-	
+
 	@Bean
 	FilterRegistrationBean<CorsFilter> corsFilter() {
-	    FilterRegistrationBean<CorsFilter> bean
-	            = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
-	    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-	    return bean;
+		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
+				new CorsFilter(corsConfigurationSource()));
+		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		return bean;
 	}
 }
