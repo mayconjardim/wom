@@ -10,7 +10,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule, Routes } from '@angular/router';
 
-import { OrderListComponent } from './order-list/order-list.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
 
 export const routes: Routes = [{ path: '', component: OrderListComponent }];
 
