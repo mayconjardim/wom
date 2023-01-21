@@ -21,9 +21,7 @@
     [opened]="isMenuOpen"
   >
     <mat-nav-list class="sidenav-area-menu">
-      <a mat-list-item routerLink="orders"
-        ><mat-icon>receipt_long</mat-icon>Orders</a
-      >
+      <a mat-list-item routerLink=""><mat-icon>receipt_long</mat-icon>Orders</a>
       <a mat-list-item routerLink="home"
         ><mat-icon>import_contacts</mat-icon>Contacts</a
       >
@@ -36,7 +34,7 @@
       <a mat-list-item routerLink="home"><mat-icon>group</mat-icon>Users</a>
       <!-- ADMIN -->
 
-      <a mat-list-item routerLink="home"><mat-icon>logout</mat-icon>Logout</a>
+      <a mat-list-item (click)="logout()"><mat-icon>logout</mat-icon>Logout</a>
     </mat-nav-list>
   </mat-drawer>
 

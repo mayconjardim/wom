@@ -13,7 +13,7 @@ const routes: Routes = [
     component: SidenavComponent,
     children: [
       {
-        path: '',
+        path: 'orders',
         loadChildren: () =>
           import('./features/order/order.module').then((m) => m.OrderModule),
       },

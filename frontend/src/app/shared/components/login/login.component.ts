@@ -49,11 +49,11 @@ export class LoginComponent {
     this.authService.authenticate(this.creds).subscribe(
       (response: any) => {
         this.authService.successfulLogin(response['access_token']);
-        this.toast.success('Logged in successfully!');
+        this.toast.success('Logged in successfully!', 'Login');
         this.router.navigate(['']);
       },
       () => {
-        this.toast.error('Email or password invalid!');
+        this.toast.error('Email or password invalid!', 'Error');
       }
     );
   }

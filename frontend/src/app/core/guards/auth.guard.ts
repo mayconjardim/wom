@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  CanActivateChild,
   CanLoad,
   CanMatch,
   Route,
@@ -16,11 +17,11 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivateChild {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
+  canActivateChild(
+    childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
     let authenticated = this.authService.isAuthenticated();
