@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
 import { Credentials } from 'src/app/shared/models/credentials';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { API_CONFIG } from './../config/api.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  jwtService: JwtHelperService = new JwtHelperService();
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -39,5 +40,9 @@ export class AuthService {
 
   isAuthenticated() {
     let token = localStorage.getItem('token');
+    if (token === null) {
+      return !this.jwtService.isTokenExpired(token);
+    }
+    return false;
   }
 }

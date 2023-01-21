@@ -1,19 +1,18 @@
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { RouterModule, Routes } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { RouterModule, Routes } from '@angular/router';
 
 import { OrderListComponent } from './order-list/order-list.component';
 
-export const routes: Routes = [
-  { path: 'orders', component: OrderListComponent },
-];
+export const routes: Routes = [{ path: '', component: OrderListComponent }];
 
 @NgModule({
   declarations: [OrderListComponent],

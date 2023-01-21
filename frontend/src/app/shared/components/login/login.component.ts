@@ -10,11 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
-import { Credentials } from '../../models/credentials';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Token } from '@angular/compiler';
+import { Credentials } from '../../models/credentials';
 
 @Component({
   selector: 'login',
@@ -40,12 +39,18 @@ export class LoginComponent {
   username = new FormControl(null, Validators.email);
   password = new FormControl(null, Validators.minLength(5));
 
-  constructor(private toast: ToastrService, private authService: AuthService) {}
+  constructor(
+    private toast: ToastrService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   login() {
     this.authService.authenticate(this.creds).subscribe(
       (response: any) => {
         this.authService.successfulLogin(response['access_token']);
+        this.toast.success('Logged in successfully!');
+        this.router.navigate(['']);
       },
       () => {
         this.toast.error('Email or password invalid!');
