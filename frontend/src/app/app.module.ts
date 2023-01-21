@@ -6,10 +6,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
+import { AuthInterceptorProvider } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
