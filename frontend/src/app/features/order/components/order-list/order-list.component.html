@@ -7,7 +7,9 @@
       >
         <table>
           <caption>
-            #44
+            #{{
+              order.id
+            }}
           </caption>
           <tr>
             <th>GC:</th>
@@ -18,14 +20,14 @@
           </tr>
           <tr>
             <th>Project Manager:</th>
-            <td>{{ order.manager }}</td>
+            <td>{{ order }}</td>
             <th>Expected Date:</th>
             <td>{{ order.expectDate }}</td>
             <td><img src="assets/icons/{{ order.orderPriority }}.svg" /></td>
           </tr>
           <tr>
             <th>Yard:</th>
-            <td>{{ order.yard }}</td>
+            <td>{{ order }}</td>
             <th>Delivery Date:</th>
             <td>{{ order.deliveryDate }}</td>
           </tr>

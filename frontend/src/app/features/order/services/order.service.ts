@@ -1,16 +1,20 @@
-import { API_CONFIG } from './../../../core/config/api.config';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Order } from '../models/order';
+import { Observable } from 'rxjs';
+
+import { Pagination } from '../models/order';
+import { API_CONFIG } from './../../../core/config/api.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
+  [x: string]: any;
   constructor(private http: HttpClient) {}
 
-  findAll(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${API_CONFIG.baseUrl}/orders`);
+  findAllPageable(page: number, pageSize: number): Observable<Pagination> {
+    return this.http.get<Pagination>(
+      `${API_CONFIG.baseUrl}/orders?page=${page}&size=${pageSize}`
+    );
   }
 }

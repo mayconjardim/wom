@@ -1,148 +1,42 @@
-import { AuthService } from 'src/app/core/services/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { Order, Pagination } from '../../models/order';
+import { OrderService } from './../../services/order.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss'],
 })
-export class OrderListComponent {
-  constructor(private service: AuthService) {
-    console.log(service.isAuthenticated());
-  }
-
-  orders = ELEMENT_DATA;
+export class OrderListComponent implements OnInit {
   panelOpenState = false;
+  orders!: Order[];
+  pages!: Pagination;
 
-  priorityColor(priority: string) {
-    if (priority == 'LOW') {
-      return 'assets/icons/low';
-    } else {
-      return '';
-    }
+  page = 0;
+  pageSize = 10;
+  totalPages!: number;
+
+  constructor(private orderService: OrderService) {}
+
+  ngOnInit(): void {
+    this.findAllPageable();
+  }
+
+  findAllPageable() {
+    this.orderService
+      .findAllPageable(this.page, this.pageSize)
+      .subscribe((res) => {
+        this.pages = res;
+        this.orders = this.pages.content;
+        this.totalPages = res.totalPages;
+      });
+  }
+
+  onPageChange(event: MatPaginator) {
+    this.page = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.findAllPageable();
   }
 }
-export interface PeriodicElement {
-  id: number;
-  startDate: string;
-  expectDate: string;
-  deliveryDate: string;
-  orderStatus: string;
-  orderPriority: string;
-  generalContractor: string;
-  manager: string;
-  yard: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    id: 1,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '2023-01-19',
-    orderStatus: 'CLOSED',
-    orderPriority: 'LOW',
-    generalContractor: 'LeBron James',
-    manager: 'Kevin Durant',
-    yard: 'Jason Tatum',
-  },
-  {
-    id: 2,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '2023-01-19',
-    orderStatus: 'PROCESSING',
-    orderPriority: 'HIGH',
-    generalContractor: 'Shareef Abdur-Rahim',
-    manager: 'Shaquille O Neal',
-    yard: 'Jason Tatum',
-  },
-  {
-    id: 3,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '2023-01-19',
-    orderStatus: 'OPEN',
-    orderPriority: 'LOW',
-    generalContractor: 'LeBron James',
-    manager: 'Kevin Durant',
-    yard: 'Jason Tatum',
-  },
-  {
-    id: 4,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '',
-    orderStatus: 'PROCESSING',
-    orderPriority: 'HIGH',
-    generalContractor: 'LeBron James',
-    manager: 'Kevin Durant',
-    yard: 'Jason Tatum',
-  },
-  {
-    id: 5,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '2023-01-19',
-    orderStatus: 'CLOSED',
-    orderPriority: 'LOW',
-    generalContractor: 'LeBron James',
-    manager: 'Kevin Durant',
-    yard: 'Jason Tatum',
-  },
-  {
-    id: 6,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '',
-    orderStatus: 'OPEN',
-    orderPriority: 'MEDIUM',
-    generalContractor: 'LeBron James',
-    manager: 'Kevin Durant',
-    yard: 'Jason Tatum',
-  },
-  {
-    id: 7,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '2023-01-19',
-    orderStatus: 'PROCESSING',
-    orderPriority: 'MEDIUM',
-    generalContractor: 'LeBron James',
-    manager: 'Kevin Durant',
-    yard: 'Jason Tatum',
-  },
-  {
-    id: 8,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '',
-    orderStatus: 'OPEN',
-    orderPriority: 'LOW',
-    generalContractor: 'LeBron James',
-    manager: 'Kevin Durant',
-    yard: 'Jason Tatum',
-  },
-  {
-    id: 9,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '2023-01-19',
-    orderStatus: 'CLOSED',
-    orderPriority: 'LOW',
-    generalContractor: 'LeBron James',
-    manager: 'Kevin Durant',
-    yard: 'Jason Tatum',
-  },
-  {
-    id: 10,
-    startDate: '2023-01-19',
-    expectDate: '2023-01-19',
-    deliveryDate: '2023-01-19',
-    orderStatus: 'CLOSED',
-    orderPriority: 'HIGH',
-    generalContractor: 'LeBron James',
-    manager: 'Kevin Durant',
-    yard: 'Jason Tatum',
-  },
-];
