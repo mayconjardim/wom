@@ -35,6 +35,10 @@
       }
     }
   }
+
+  .pagination ::ng-deep .ngx-pagination .current {
+    background-color: #1b5e20;
+  }
 }
 
 @media only screen and (min-width: 768px) {

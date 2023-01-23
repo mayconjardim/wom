@@ -72,7 +72,7 @@ public class User implements UserDetails, Serializable {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
+	
 	public String getLastName() {
 		return lastName;
 	}
@@ -81,6 +81,10 @@ public class User implements UserDetails, Serializable {
 		this.lastName = lastName;
 	}
 
+	public String getName() {
+		return this.firstName + " " + this.lastName;
+	}
+	
 	public String getEmail() {
 		return email;
 	}

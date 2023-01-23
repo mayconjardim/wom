@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wom.api.entities.enums.OrderPriority;
 import com.wom.api.entities.enums.OrderStatus;
 
@@ -49,6 +50,7 @@ public class WorkOrder implements Serializable {
 
 	private String description;
 
+	@JsonIgnoreProperties
 	@ManyToMany
 	@JoinTable(name = "order_user", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private Set<User> users = new HashSet<>();

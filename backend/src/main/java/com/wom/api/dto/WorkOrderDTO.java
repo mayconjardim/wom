@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.wom.api.entities.User;
 import com.wom.api.entities.WorkOrder;
 import com.wom.api.entities.enums.OrderPriority;
 import com.wom.api.entities.enums.OrderStatus;
@@ -42,6 +44,11 @@ public class WorkOrderDTO implements Serializable {
 
 	private String description;
 
+	private String managerName;
+
+	private String yardName;
+
+	@JsonIgnoreProperties(value = { "firstName", "lastName", "email", "phoneNumber", "roles" })
 	private Set<UserDTO> users = new HashSet<>();
 
 	public WorkOrderDTO() {
@@ -49,7 +56,7 @@ public class WorkOrderDTO implements Serializable {
 
 	public WorkOrderDTO(Long id, LocalDate startDate, LocalDate expectDate, LocalDate deliveryDate, Integer orderStatus,
 			Integer orderPriority, String generalContractor, String jobSite, String address, String city,
-			String description) {
+			String description, String managerName, String yardName) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -62,6 +69,8 @@ public class WorkOrderDTO implements Serializable {
 		this.address = address;
 		this.city = city;
 		this.description = description;
+		this.managerName = managerName;
+		this.yardName = yardName;
 	}
 
 	public WorkOrderDTO(WorkOrder entity) {
@@ -77,6 +86,13 @@ public class WorkOrderDTO implements Serializable {
 		city = entity.getCity();
 		description = entity.getDescription();
 		entity.getUsers().forEach(user -> this.users.add(new UserDTO(user)));
+		managerName = entity.getUsers().stream()
+				.filter(user -> user.getRoles().stream().anyMatch(role -> role.getAuthority().equals("ROLE_MANAGER")))
+				.map(User::getName).findFirst().orElse(null);
+
+		yardName = entity.getUsers().stream()
+				.filter(user -> user.getRoles().stream().anyMatch(role -> role.getAuthority().equals("ROLE_YARD")))
+				.map(User::getName).findFirst().orElse(null);
 	}
 
 	public Long getId() {
@@ -169,6 +185,14 @@ public class WorkOrderDTO implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public String getYardName() {
+		return yardName;
 	}
 
 	public Set<UserDTO> getUsers() {

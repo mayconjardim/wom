@@ -12,6 +12,8 @@ export interface Order {
   address: string;
   city: string;
   description: string;
+  managerName: string;
+  yardName: string;
   users: User[];
 }
 

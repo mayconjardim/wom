@@ -25,14 +25,14 @@
           </tr>
           <tr>
             <th>Project Manager:</th>
-            <td>{{ order }}</td>
+            <td>{{ order.managerName }}</td>
             <th>Expected Date:</th>
             <td>{{ order.expectDate }}</td>
             <td><img src="assets/icons/{{ order.orderPriority }}.svg" /></td>
           </tr>
           <tr>
             <th>Yard:</th>
-            <td>{{ order }}</td>
+            <td>{{ order.yardName }}</td>
             <th>Delivery Date:</th>
             <td>{{ order.deliveryDate }}</td>
           </tr>
@@ -46,6 +46,7 @@
     </mat-expansion-panel>
   </mat-accordion>
   <pagination-controls
+    class="pagination"
     (pageChange)="pageChangeEvent($event)"
   ></pagination-controls>
 </div>
