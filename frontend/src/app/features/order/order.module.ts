@@ -1,4 +1,3 @@
-import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';

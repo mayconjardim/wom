@@ -1,5 +1,12 @@
 <div class="container">
-  <mat-accordion *ngFor="let order of orders">
+  <mat-accordion
+    *ngFor="
+      let order of orders
+        | slice
+          : paginator.pageIndex * pageSize
+          : (paginator.pageIndex + 1) * pageSize
+    "
+  >
     <mat-expansion-panel>
       <mat-expansion-panel-header
         [collapsedHeight]="'7rem'"
@@ -35,4 +42,11 @@
       </mat-expansion-panel-header>
     </mat-expansion-panel>
   </mat-accordion>
+  <mat-paginator
+    #paginator
+    [length]="length"
+    [pageSize]="pageSize"
+    (page)="pageEvent = $event"
+  >
+  </mat-paginator>
 </div>

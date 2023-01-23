@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 
 import { Order, Pagination } from '../../models/order';
 import { OrderService } from './../../services/order.service';
-import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-order-list',
@@ -16,27 +16,20 @@ export class OrderListComponent implements OnInit {
 
   page = 0;
   pageSize = 10;
-  totalPages!: number;
+  length!: number;
+  pageEvent!: PageEvent;
 
   constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.findAllPageable();
+    this.findAllPageable(0, 10);
   }
 
-  findAllPageable() {
-    this.orderService
-      .findAllPageable(this.page, this.pageSize)
-      .subscribe((res) => {
-        this.pages = res;
-        this.orders = this.pages.content;
-        this.totalPages = res.totalPages;
-      });
-  }
-
-  onPageChange(event: MatPaginator) {
-    this.page = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.findAllPageable();
+  findAllPageable(page: number, pageSize: number) {
+    this.orderService.findAllPageable(page, pageSize).subscribe((res) => {
+      this.pages = res;
+      this.orders = this.pages.content;
+      this.length = res.totalPages;
+    });
   }
 }
