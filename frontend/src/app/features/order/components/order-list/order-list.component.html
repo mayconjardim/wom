@@ -1,52 +1,61 @@
 <div class="container">
-  <mat-accordion
-    *ngFor="
-      let order of orders
-        | paginate : { itemsPerPage: 10, currentPage: page, totalItems: length }
-    "
-  >
-    <mat-expansion-panel>
-      <mat-expansion-panel-header
-        [collapsedHeight]="'7rem'"
-        [expandedHeight]="'7rem'"
-      >
-        <table>
-          <caption>
-            #{{
-              order.id
-            }}
-          </caption>
-          <tr>
-            <th>GC:</th>
-            <td>{{ order.generalContractor }}</td>
-            <th>Start Date:</th>
-            <td>{{ order.startDate }}</td>
-            <td><img src="assets/icons/{{ order.orderStatus }}.svg" /></td>
-          </tr>
-          <tr>
-            <th>Project Manager:</th>
-            <td>{{ order.managerName }}</td>
-            <th>Expected Date:</th>
-            <td>{{ order.expectDate }}</td>
-            <td><img src="assets/icons/{{ order.orderPriority }}.svg" /></td>
-          </tr>
-          <tr>
-            <th>Yard:</th>
-            <td>{{ order.yardName }}</td>
-            <th>Delivery Date:</th>
-            <td>{{ order.deliveryDate }}</td>
-          </tr>
-        </table>
-      </mat-expansion-panel-header>
-      <div class="container-actions">
-        <a routerLink="home"><mat-icon>edit</mat-icon></a
-        ><a routerLink="home"><mat-icon>assignment</mat-icon></a
-        ><a routerLink="home"><mat-icon>delete_forever</mat-icon></a>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <pagination-controls
-    class="pagination"
-    (pageChange)="pageChangeEvent($event)"
-  ></pagination-controls>
+  <div class="container-filters">
+    <button mat-icon-button color="primary">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+
+  <div class="container-card">
+    <mat-accordion
+      *ngFor="
+        let order of orders
+          | paginate
+            : { itemsPerPage: 10, currentPage: page, totalItems: length }
+      "
+    >
+      <mat-expansion-panel>
+        <mat-expansion-panel-header
+          [collapsedHeight]="'8rem'"
+          [expandedHeight]="'9rem'"
+        >
+          <table>
+            <caption>
+              #{{
+                order.id
+              }}
+            </caption>
+            <tr>
+              <th>GC:</th>
+              <td>{{ order.generalContractor }}</td>
+              <th>Start Date:</th>
+              <td>{{ order.startDate }}</td>
+              <td><img src="assets/icons/{{ order.orderStatus }}.svg" /></td>
+            </tr>
+            <tr>
+              <th>Project Manager:</th>
+              <td>{{ order.managerName }}</td>
+              <th>Expected Date:</th>
+              <td>{{ order.expectDate }}</td>
+              <td><img src="assets/icons/{{ order.orderPriority }}.svg" /></td>
+            </tr>
+            <tr>
+              <th>Yard:</th>
+              <td>{{ order.yardName }}</td>
+              <th>Delivery Date:</th>
+              <td>{{ order.deliveryDate }}</td>
+            </tr>
+          </table>
+        </mat-expansion-panel-header>
+        <div class="container-card-actions">
+          <a routerLink="home"><mat-icon>edit</mat-icon></a
+          ><a routerLink="home"><mat-icon>assignment</mat-icon></a
+          ><a routerLink="home"><mat-icon>delete_forever</mat-icon></a>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChangeEvent($event)"
+    ></pagination-controls>
+  </div>
 </div>

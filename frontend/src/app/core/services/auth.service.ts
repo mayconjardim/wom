@@ -12,10 +12,9 @@ export class AuthService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: 'Basic bXljbGllbnRpZDpteWNsaWVudHNlY3JldA==',
-      Accept: '*/*',
       grant_type: 'password',
+      Accept: '*/*',
     }),
   };
 

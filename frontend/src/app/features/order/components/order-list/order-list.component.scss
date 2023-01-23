@@ -1,43 +1,60 @@
 .container {
   width: 95%;
   margin: 0.5rem auto;
-  display: flex;
-  justify-content: first baseline;
   flex-wrap: wrap;
   font-size: 9px;
 
-  mat-accordion {
-    mat-expansion-panel {
-      width: 24rem;
-      margin: 0.5rem;
+  &-filters {
+    font-size: 9px;
+
+    button {
+      padding: 0;
+      margin: 1rem 0;
     }
 
-    table {
-      width: 100%;
-      text-align: left;
-
-      caption {
-        text-align: left;
-        color: green;
-      }
+    mat-form-field {
+      width: 10rem;
+      margin: 0 0.5rem;
     }
   }
 
-  &-actions {
+  &-card {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
 
-    mat-icon {
-      color: #1b5e20;
+    mat-accordion {
+      mat-expansion-panel {
+        width: 23rem;
+        margin: 0.5rem auto;
+      }
 
-      &:hover {
-        color: black;
+      table {
+        width: 100%;
+        text-align: left;
+
+        caption {
+          text-align: left;
+          color: green;
+        }
       }
     }
-  }
 
-  .pagination ::ng-deep .ngx-pagination .current {
-    background-color: #1b5e20;
+    &-actions {
+      display: flex;
+      justify-content: space-around;
+
+      mat-icon {
+        color: #1b5e20;
+
+        &:hover {
+          color: black;
+        }
+      }
+    }
+    .pagination ::ng-deep .ngx-pagination .current {
+      background-color: #1b5e20;
+    }
   }
 }
 
