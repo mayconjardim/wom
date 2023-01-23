@@ -10,14 +10,11 @@ import { OrderService } from './../../services/order.service';
   styleUrls: ['./order-list.component.scss'],
 })
 export class OrderListComponent implements OnInit {
-  panelOpenState = false;
   orders!: Order[];
-  pages!: Pagination;
 
   page = 0;
   pageSize = 10;
   length!: number;
-  pageEvent!: PageEvent;
 
   constructor(private orderService: OrderService) {}
 
@@ -27,9 +24,13 @@ export class OrderListComponent implements OnInit {
 
   findAllPageable(page: number, pageSize: number) {
     this.orderService.findAllPageable(page, pageSize).subscribe((res) => {
-      this.pages = res;
-      this.orders = this.pages.content;
-      this.length = res.totalPages;
+      this.orders = res.content;
+      this.length = res.totalElements;
     });
+  }
+
+  pageChangeEvent(event: number) {
+    this.page = event;
+    this.findAllPageable(this.page - 1, this.pageSize);
   }
 }

@@ -2,15 +2,13 @@
   <mat-accordion
     *ngFor="
       let order of orders
-        | slice
-          : paginator.pageIndex * pageSize
-          : (paginator.pageIndex + 1) * pageSize
+        | paginate : { itemsPerPage: 10, currentPage: page, totalItems: length }
     "
   >
     <mat-expansion-panel>
       <mat-expansion-panel-header
         [collapsedHeight]="'7rem'"
-        [expandedHeight]="'9rem'"
+        [expandedHeight]="'7rem'"
       >
         <table>
           <caption>
@@ -40,13 +38,14 @@
           </tr>
         </table>
       </mat-expansion-panel-header>
+      <div class="container-actions">
+        <a routerLink="home"><mat-icon>edit</mat-icon></a
+        ><a routerLink="home"><mat-icon>assignment</mat-icon></a
+        ><a routerLink="home"><mat-icon>delete_forever</mat-icon></a>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
-  <mat-paginator
-    #paginator
-    [length]="length"
-    [pageSize]="pageSize"
-    (page)="pageEvent = $event"
-  >
-  </mat-paginator>
+  <pagination-controls
+    (pageChange)="pageChangeEvent($event)"
+  ></pagination-controls>
 </div>
