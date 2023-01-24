@@ -19,13 +19,13 @@ public class WorkOrderDTO implements Serializable {
 
 	private Long id;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "MM-dd-yyyy")
 	private LocalDate startDate = LocalDate.now();
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDate expectDate;
+	@JsonFormat(pattern = "MM-dd-yyyy")
+	private LocalDate expectedDate;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "MM-dd-yyyy")
 	private LocalDate deliveryDate;
 
 	@NotNull
@@ -54,13 +54,13 @@ public class WorkOrderDTO implements Serializable {
 	public WorkOrderDTO() {
 	}
 
-	public WorkOrderDTO(Long id, LocalDate startDate, LocalDate expectDate, LocalDate deliveryDate, Integer orderStatus,
+	public WorkOrderDTO(Long id, LocalDate startDate, LocalDate expectedDate, LocalDate deliveryDate, Integer orderStatus,
 			Integer orderPriority, String generalContractor, String jobSite, String address, String city,
 			String description, String managerName, String yardName) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
-		this.expectDate = expectDate;
+		this.expectedDate = expectedDate;
 		this.deliveryDate = deliveryDate;
 		this.orderStatus = orderStatus;
 		this.orderPriority = orderPriority;
@@ -76,7 +76,7 @@ public class WorkOrderDTO implements Serializable {
 	public WorkOrderDTO(WorkOrder entity) {
 		id = entity.getId();
 		startDate = entity.getStartDate();
-		expectDate = entity.getExpectDate();
+		expectedDate = entity.getExpectedDate();
 		deliveryDate = entity.getDeliveryDate();
 		orderStatus = entity.getOrderStatus().getCode();
 		orderPriority = entity.getOrderPriority().getCode();
@@ -111,12 +111,12 @@ public class WorkOrderDTO implements Serializable {
 		this.startDate = startDate;
 	}
 
-	public LocalDate getExpectDate() {
-		return expectDate;
+	public LocalDate getExpectedDate() {
+		return expectedDate;
 	}
 
-	public void setExpectDate(LocalDate expectDate) {
-		this.expectDate = expectDate;
+	public void setExpectedDate(LocalDate expectedDate) {
+		this.expectedDate = expectedDate;
 	}
 
 	public LocalDate getDeliveryDate() {

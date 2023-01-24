@@ -7,10 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
 import { AuthInterceptorProvider } from './core/interceptors/auth.interceptor';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent],
-  providers: [AuthInterceptorProvider],
+  providers: [
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { disableClose: true } },
+    AuthInterceptorProvider,
+  ],
+
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,

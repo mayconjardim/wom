@@ -77,7 +77,7 @@ public class WorkOrderService {
 
 	private void copyDtoEntity(WorkOrderDTO dto, WorkOrder entity) {
 		entity.setStartDate(dto.getStartDate());
-		entity.setExpectDate(dto.getExpectDate());
+		entity.setExpectedDate(dto.getExpectedDate());
 		entity.setDeliveryDate(dto.getDeliveryDate());
 		entity.setOrderStatus(dto.getOrderStatus());
 		entity.setOrderPriority(dto.getOrderPriority());

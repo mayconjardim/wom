@@ -3,7 +3,7 @@ import { User } from '../../users/models/user';
 export interface Order {
   id?: number;
   startDate: string;
-  expectDate: string;
+  expectedDate: string;
   deliveryDate?: string;
   orderStatus: string;
   orderPriority: string;

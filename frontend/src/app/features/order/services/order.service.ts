@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Pagination } from '../models/order';
+import { Order, Pagination } from '../models/order';
 import { API_CONFIG } from './../../../core/config/api.config';
 
 @Injectable({
@@ -16,5 +16,9 @@ export class OrderService {
     return this.http.get<Pagination>(
       `${API_CONFIG.baseUrl}/orders?page=${page}&size=${pageSize}`
     );
+  }
+
+  create(order: Order): Observable<Order> {
+    return this.http.post<Order>(`${API_CONFIG.baseUrl}/orders`, order);
   }
 }

@@ -31,7 +31,7 @@ public class WorkOrder implements Serializable {
 	private LocalDate startDate = LocalDate.now();
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDate expectDate;
+	private LocalDate expectedDate;
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate deliveryDate;
@@ -58,12 +58,12 @@ public class WorkOrder implements Serializable {
 	public WorkOrder() {
 	}
 
-	public WorkOrder(Long id, LocalDate expectDate, LocalDate deliveryDate, OrderStatus orderStatus,
+	public WorkOrder(Long id, LocalDate expectedDate, LocalDate deliveryDate, OrderStatus orderStatus,
 			OrderPriority orderPriority, String generalContractor, String jobSite, String address, String city,
 			String description) {
 		super();
 		this.id = id;
-		this.expectDate = expectDate;
+		this.expectedDate = expectedDate;
 		this.deliveryDate = deliveryDate;
 		setOrderStatus(orderStatus);
 		setOrderPriority(orderPriority);
@@ -90,12 +90,12 @@ public class WorkOrder implements Serializable {
 		this.startDate = startDate;
 	}
 
-	public LocalDate getExpectDate() {
-		return expectDate;
+	public LocalDate getExpectedDate() {
+		return expectedDate;
 	}
 
-	public void setExpectDate(LocalDate expectDate) {
-		this.expectDate = expectDate;
+	public void setExpectedDate(LocalDate expectedDate) {
+		this.expectedDate = expectedDate;
 	}
 
 	public LocalDate getDeliveryDate() {
