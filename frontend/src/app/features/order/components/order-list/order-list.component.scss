@@ -14,7 +14,7 @@
   &-card {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
 
     mat-accordion {
       mat-expansion-panel {
@@ -45,6 +45,10 @@
         }
       }
     }
+  }
+
+  &-pagination {
+    min-height: 100%;
     .pagination ::ng-deep .ngx-pagination .current {
       background-color: #1b5e20;
     }

@@ -2,7 +2,7 @@ import { User } from '../../users/models/user';
 
 export interface Order {
   id?: number;
-  startDate: string;
+  startDate?: string;
   expectedDate: string;
   deliveryDate?: string;
   orderStatus: string;
@@ -12,9 +12,9 @@ export interface Order {
   address: string;
   city: string;
   description: string;
-  managerName: string;
-  yardName: string;
-  users: User[];
+  managerName?: string;
+  yardName?: string;
+  users: any[];
 }
 
 export interface Pagination {

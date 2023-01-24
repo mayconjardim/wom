@@ -1,6 +1,6 @@
 <div class="container">
   <div class="container-filters">
-    <button mat-icon-button (click)="onCreate()" color="primary">
+    <button mat-icon-button (click)="openCreate()" color="primary">
       <mat-icon>note_add</mat-icon>
     </button>
 
@@ -68,6 +68,8 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
+  </div>
+  <div class="container-pagination">
     <pagination-controls
       class="pagination"
       (pageChange)="pageChangeEvent($event)"

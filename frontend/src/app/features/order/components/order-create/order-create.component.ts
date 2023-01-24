@@ -3,7 +3,7 @@ import { UserService } from './../../../users/services/user.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { OrderService } from './../../services/order.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormRecord, Validators } from '@angular/forms';
 import { User } from 'src/app/features/users/models/user';
 import { Order } from '../../models/order';
 import { Route, Router } from '@angular/router';
@@ -33,18 +33,15 @@ export class OrderCreateComponent implements OnInit {
   };
 
   order: Order = {
-    startDate: '',
     expectedDate: '',
-    orderStatus: '1',
+    orderStatus: '0',
     orderPriority: '',
     generalContractor: '',
     jobSite: '',
     address: '',
     city: '',
     description: '',
-    managerName: '',
-    yardName: '',
-    users: [this.manager],
+    users: [],
   };
 
   managers!: User[];
@@ -54,6 +51,9 @@ export class OrderCreateComponent implements OnInit {
   priority: FormControl = new FormControl(null, [Validators.required]);
   yardId: FormControl = new FormControl(null, [Validators.required]);
   generalContractor: FormControl = new FormControl(null, [Validators.required]);
+  address: FormControl = new FormControl(null);
+  jobSite: FormControl = new FormControl(null);
+  city: FormControl = new FormControl(null);
   description: FormControl = new FormControl(null, [Validators.required]);
 
   constructor(
@@ -65,18 +65,6 @@ export class OrderCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllUsers();
-  }
-
-  createOrder() {
-    this.dialogRef.disableClose = true;
-    this.orderService.create(this.order).subscribe(
-      (response) => {
-        this.toastService.success('Order created successfully!', 'New order');
-      },
-      (ex) => {
-        this.toastService.error(ex.error.error);
-      }
-    );
   }
 
   findAllUsers(): void {
@@ -101,6 +89,12 @@ export class OrderCreateComponent implements OnInit {
     });
   }
 
+  getYard(ev: any) {
+    let id = this.yardId.value;
+    let yardObj = this.yards.find((x) => x.id == id);
+    this.yard = yardObj!;
+  }
+
   validForm(): boolean {
     return (
       this.expectedDate.valid &&
@@ -108,6 +102,19 @@ export class OrderCreateComponent implements OnInit {
       this.generalContractor.valid &&
       this.yardId.valid &&
       this.description.valid
+    );
+  }
+
+  createOrder(ev: any) {
+    this.order.users.push({ id: this.manager.id }, { id: this.yard.id });
+    this.orderService.create(this.order).subscribe(
+      (res) => {
+        this.toastService.success('Order created successfully', 'New Order');
+        this.dialogRef.close();
+      },
+      (ex) => {
+        this.toastService.error(ex.error.error);
+      }
     );
   }
 }

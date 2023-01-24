@@ -1,7 +1,8 @@
 package com.wom.api.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,13 +21,13 @@ public class WorkOrderDTO implements Serializable {
 	private Long id;
 
 	@JsonFormat(pattern = "MM-dd-yyyy")
-	private LocalDate startDate = LocalDate.now();
+	private Date startDate = Date.from(Instant.now());
 
 	@JsonFormat(pattern = "MM-dd-yyyy")
-	private LocalDate expectedDate;
+	private Date expectedDate;
 
 	@JsonFormat(pattern = "MM-dd-yyyy")
-	private LocalDate deliveryDate;
+	private Date deliveryDate;
 
 	@NotNull
 	private Integer orderStatus;
@@ -54,7 +55,7 @@ public class WorkOrderDTO implements Serializable {
 	public WorkOrderDTO() {
 	}
 
-	public WorkOrderDTO(Long id, LocalDate startDate, LocalDate expectedDate, LocalDate deliveryDate, Integer orderStatus,
+	public WorkOrderDTO(Long id, Date startDate, Date expectedDate, Date deliveryDate, Integer orderStatus,
 			Integer orderPriority, String generalContractor, String jobSite, String address, String city,
 			String description, String managerName, String yardName) {
 		super();
@@ -103,27 +104,27 @@ public class WorkOrderDTO implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDate getExpectedDate() {
+	public Date getExpectedDate() {
 		return expectedDate;
 	}
 
-	public void setExpectedDate(LocalDate expectedDate) {
+	public void setExpectedDate(Date expectedDate) {
 		this.expectedDate = expectedDate;
 	}
 
-	public LocalDate getDeliveryDate() {
+	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(LocalDate deliveryDate) {
+	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 

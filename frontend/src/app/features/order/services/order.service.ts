@@ -14,7 +14,7 @@ export class OrderService {
 
   findAllPageable(page: number, pageSize: number): Observable<Pagination> {
     return this.http.get<Pagination>(
-      `${API_CONFIG.baseUrl}/orders?page=${page}&size=${pageSize}`
+      `${API_CONFIG.baseUrl}/orders?page=${page}&size=${pageSize}&sort=id,desc`
     );
   }
 

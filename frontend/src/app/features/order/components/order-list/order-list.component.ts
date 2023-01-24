@@ -41,7 +41,7 @@ export class OrderListComponent implements OnInit {
     });
   }
 
-  onCreate() {
+  openCreate(): void {
     this.dialog.open(OrderCreateComponent);
   }
 }
