@@ -40,9 +40,9 @@
       <mat-form-field appearance="outline" class="select">
         <mat-label>Yard</mat-label>
         <mat-select [formControl]="yard" yard>
-          <mat-option value="0">LOW</mat-option>
-          <mat-option value="1">HIGH</mat-option>
-          <mat-option value="2">CLOSED</mat-option>
+          <mat-option *ngFor="let yard of yards" value="{{ yard.id }}">{{
+            yard.name
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

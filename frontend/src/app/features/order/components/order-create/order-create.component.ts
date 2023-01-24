@@ -1,3 +1,4 @@
+import { UserService } from './../../../users/services/user.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { OrderService } from './../../services/order.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,8 +11,8 @@ import { User } from 'src/app/features/users/models/user';
   styleUrls: ['./order-create.component.scss'],
 })
 export class OrderCreateComponent implements OnInit {
-  managers: User[] = [];
-  yards: User[] = [];
+  managers!: User[];
+  yards!: User[];
 
   expectedDate: FormControl = new FormControl(null, [Validators.required]);
   priority: FormControl = new FormControl(null, [Validators.required]);
@@ -21,10 +22,25 @@ export class OrderCreateComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
+    private userService: UserService,
     public dialogRef: MatDialogRef<OrderCreateComponent>
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.findAllUsers();
+  }
+
+  findAllUsers(): void {
+    this.userService.findAll().subscribe((res) => {
+      let users = res;
+      this.managers = users.filter((user) =>
+        user.roles.some((auth) => auth.authority.includes('ROLE_MANAGER'))
+      );
+      this.yards = users.filter((user) =>
+        user.roles.some((auth) => auth.authority.includes('ROLE_YARD'))
+      );
+    });
+  }
 
   validForm(): boolean {
     return (
