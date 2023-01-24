@@ -1,1 +1,85 @@
-<p>order-create works!</p>
+<div class="container">
+  <form class="container-form">
+    <h1>Create New Order</h1>
+    <div class="container-half-width">
+      <mat-form-field appearance="outline" class="date">
+        <mat-label>Expected Date</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="select">
+        <mat-label>Priority</mat-label>
+        <mat-select>
+          <mat-option value="0">LOW</mat-option>
+          <mat-option value="1">HIGH</mat-option>
+          <mat-option value="2">CLOSED</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="container-half-width">
+      <mat-form-field appearance="outline" class="select">
+        <mat-label>Manager</mat-label>
+        <mat-select>
+          <mat-option value="0">LOW</mat-option>
+          <mat-option value="1">HIGH</mat-option>
+          <mat-option value="2">CLOSED</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="select">
+        <mat-label>Yard</mat-label>
+        <mat-select>
+          <mat-option value="0">LOW</mat-option>
+          <mat-option value="1">HIGH</mat-option>
+          <mat-option value="2">CLOSED</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="container-full-width">
+      <mat-form-field appearance="outline" class="input-full">
+        <mat-label>General Contractor</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-full">
+        <mat-label>Street Address</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </div>
+
+    <div class="container-half-width">
+      <mat-form-field appearance="outline" class="input">
+        <mat-label>Job Site</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input">
+        <mat-label>City</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </div>
+
+    <div class="container-full-width">
+      <mat-form-field appearance="outline" class="text-area">
+        <mat-label>Description</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="container-actions">
+      <button mat-icon-button>
+        <mat-icon color="primary">add_circle</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon color="warn">close</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>
