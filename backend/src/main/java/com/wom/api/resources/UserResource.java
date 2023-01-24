@@ -1,6 +1,7 @@
 package com.wom.api.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -30,8 +31,14 @@ public class UserResource {
 	private UserService userService;
 
 	@GetMapping
-	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable) {
-		Page<UserDTO> list = userService.findAllPaged(pageable);
+	public ResponseEntity<Page<UserDTO>> findAllPaged(Pageable pageable) {
+		Page<UserDTO> page = userService.findAllPaged(pageable);
+		return ResponseEntity.ok().body(page);
+	}
+
+	@GetMapping(value = "/all")
+	public ResponseEntity<List<UserDTO>> findAll() {
+		List<UserDTO> list = userService.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 

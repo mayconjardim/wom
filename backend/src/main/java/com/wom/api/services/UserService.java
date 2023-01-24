@@ -1,6 +1,8 @@
 package com.wom.api.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -44,6 +46,12 @@ public class UserService implements UserDetailsService {
 		return page.map(user -> new UserDTO(user));
 	}
 
+	@Transactional(readOnly = true)
+	public List<UserDTO> findAll( ) {
+		List<User> list = userRepository.findAll();
+		return list.stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
+	}
+	
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		Optional<User> obj = userRepository.findById(id);
