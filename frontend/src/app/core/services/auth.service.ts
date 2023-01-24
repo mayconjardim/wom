@@ -1,3 +1,4 @@
+import { Role } from './../../features/users/models/role';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Credentials } from 'src/app/shared/models/credentials';
@@ -33,8 +34,16 @@ export class AuthService {
     );
   }
 
-  successfulLogin(authToken: string) {
+  successfulLogin(
+    authToken: string,
+    userName: string,
+    userId: string,
+    role: Role[]
+  ) {
     localStorage.setItem('token', authToken);
+    localStorage.setItem('userName', userName);
+    localStorage.setItem('userId', userId);
+    localStorage.setItem('role', JSON.stringify(role));
   }
 
   isAuthenticated() {

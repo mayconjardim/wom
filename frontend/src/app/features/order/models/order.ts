@@ -1,7 +1,7 @@
 import { User } from '../../users/models/user';
 
 export interface Order {
-  id: number;
+  id?: number;
   startDate: string;
   expectDate: string;
   deliveryDate?: string;

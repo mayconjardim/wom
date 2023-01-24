@@ -50,14 +50,27 @@ export class LoginComponent {
   login() {
     this.authService.authenticate(this.creds).subscribe(
       (response: any) => {
-        this.authService.successfulLogin(response['access_token']);
-        this.toast.success('Logged in successfully!', 'Login');
-        this.router.navigate(['']);
+        this.handleSuccessfulLogin(response);
       },
       () => {
-        this.toast.error('Email or password invalid!', 'Error');
+        this.handleFailedLogin();
       }
     );
+  }
+
+  handleSuccessfulLogin(response: any) {
+    this.authService.successfulLogin(
+      response['access_token'],
+      response['userName'],
+      response['userId'],
+      response['role']
+    );
+    this.toast.success('Logged in successfully!', 'Login');
+    this.router.navigate(['']);
+  }
+
+  handleFailedLogin() {
+    this.toast.error('Email or password invalid!', 'Error');
   }
 
   validForm(): boolean {

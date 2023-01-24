@@ -4,6 +4,7 @@ import { OrderService } from './../../services/order.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/features/users/models/user';
+import { Order } from '../../models/order';
 
 @Component({
   selector: 'order-create',
@@ -11,6 +12,21 @@ import { User } from 'src/app/features/users/models/user';
   styleUrls: ['./order-create.component.scss'],
 })
 export class OrderCreateComponent implements OnInit {
+  order: Order = {
+    startDate: '',
+    expectDate: '',
+    orderStatus: '1',
+    orderPriority: '',
+    generalContractor: '',
+    jobSite: '',
+    address: '',
+    city: '',
+    description: '',
+    managerName: '',
+    yardName: '',
+    users: [],
+  };
+
   managers!: User[];
   yards!: User[];
 
