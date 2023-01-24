@@ -32,5 +32,11 @@ export class OrderListComponent implements OnInit {
   pageChangeEvent(event: number) {
     this.page = event;
     this.findAllPageable(this.page - 1, this.pageSize);
+
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 }

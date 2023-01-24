@@ -1,46 +1,52 @@
-<div container>
-  <mat-toolbar color="primary" class="toolbar">
-    <button mat-icon-button (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
+<div class="container">
+  <mat-toolbar color="primary" class="container-toolbar">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()"
+    >
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <mat-icon>park</mat-icon>
-    <span>Wallace Building Products</span>
-    <span class="toolbar-spacer"></span>
+    <span class="mat-spacer"></span>
+    <span><mat-icon>park</mat-icon>Wallace Building Products</span>
   </mat-toolbar>
+  <mat-drawer-container class="container-sidenav">
+    <mat-drawer
+      #drawer
+      color="primary"
+      class="container-sidenav-area mat-elevation-z8"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)"
+      mode="side"
+      fixed
+      [opened]="isMenuOpen"
+    >
+      <mat-nav-list class="container-sidenav-area-menu">
+        <a mat-list-item routerLink="orders"
+          ><mat-icon>receipt_long</mat-icon>Orders</a
+        >
+        <a mat-list-item routerLink="home"
+          ><mat-icon>import_contacts</mat-icon>Contacts</a
+        >
+
+        <a mat-list-item routerLink="home"
+          ><mat-icon>calculate</mat-icon>Calculator</a
+        >
+
+        <!-- ADMIN -->
+        <a mat-list-item routerLink="home"><mat-icon>group</mat-icon>Users</a>
+        <!-- ADMIN -->
+
+        <a mat-list-item (click)="logout()"
+          ><mat-icon>logout</mat-icon>Logout</a
+        >
+      </mat-nav-list>
+    </mat-drawer>
+
+    <div class="container-sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-container>
 </div>
-<mat-drawer-container class="sidenav" autosize>
-  <mat-drawer
-    #drawer
-    color="primary"
-    class="sidenav-area mat-elevation-z8"
-    fixedInViewport="true"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)"
-    mode="side"
-    [opened]="isMenuOpen"
-  >
-    <mat-nav-list class="sidenav-area-menu">
-      <a mat-list-item routerLink="orders"
-        ><mat-icon>receipt_long</mat-icon>Orders</a
-      >
-      <a mat-list-item routerLink="home"
-        ><mat-icon>import_contacts</mat-icon>Contacts</a
-      >
-
-      <a mat-list-item routerLink="home"
-        ><mat-icon>calculate</mat-icon>Calculator</a
-      >
-
-      <!-- ADMIN -->
-      <a mat-list-item routerLink="home"><mat-icon>group</mat-icon>Users</a>
-      <!-- ADMIN -->
-
-      <a mat-list-item (click)="logout()"><mat-icon>logout</mat-icon>Logout</a>
-    </mat-nav-list>
-  </mat-drawer>
-
-  <div class="sidenav-content">
-    <router-outlet></router-outlet>
-  </div>
-</mat-drawer-container>

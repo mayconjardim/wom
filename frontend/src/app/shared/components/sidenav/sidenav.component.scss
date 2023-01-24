@@ -1,33 +1,23 @@
 .container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #eee;
-}
-
-.toolbar {
-  mat-icon {
-    margin-right: 0.2rem;
+  &-toolbar {
+    mat-icon {
+      margin-right: 10px;
+      vertical-align: text-bottom;
+    }
   }
 
-  &-spacer {
-    flex: 1 1 auto;
-  }
-}
+  &-sidenav {
+    min-height: 100vh;
+    &-area {
+      width: 13rem;
 
-.sidenav {
-  height: 100%;
-  &-area {
-    width: 13rem;
+      &-menu {
+        margin: 10px;
 
-    &-menu {
-      margin: 10px;
-
-      mat-icon {
-        margin-right: 10px;
-        vertical-align: text-bottom;
+        mat-icon {
+          margin-right: 10px;
+          vertical-align: text-bottom;
+        }
       }
     }
   }
