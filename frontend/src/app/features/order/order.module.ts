@@ -9,11 +9,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { OrderListComponent } from './components/order-list/order-list.component';
+import { OrderCreateComponent } from './components/order-create/order-create.component';
 
 export const routes: Routes = [{ path: '', component: OrderListComponent }];
 
 @NgModule({
-  declarations: [OrderListComponent],
+  declarations: [OrderListComponent, OrderCreateComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
