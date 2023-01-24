@@ -1,4 +1,25 @@
 <div class="container">
+  <div class="container-filters">
+    <button mat-icon-button color="primary">
+      <mat-icon>note_add</mat-icon>
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon color="primary">receipt_long</mat-icon>OPEN
+      </button>
+      <button mat-menu-item>
+        <mat-icon color="accent">receipt_long</mat-icon>PROCESSING
+      </button>
+      <button mat-menu-item>
+        <mat-icon color="warn">receipt_long</mat-icon>CLOSED
+      </button>
+    </mat-menu>
+  </div>
+
   <div class="container-card">
     <mat-accordion
       *ngFor="
@@ -7,7 +28,7 @@
             : { itemsPerPage: 10, currentPage: page, totalItems: length }
       "
     >
-      <mat-expansion-panel>
+      <mat-expansion-panel class="mat-elevation-z6">
         <mat-expansion-panel-header
           [collapsedHeight]="'8rem'"
           [expandedHeight]="'9rem'"

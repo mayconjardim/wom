@@ -3,9 +3,9 @@
 @include mat.core();
 
 $frontend-primary: mat.define-palette(mat.$green-palette, 900);
-$frontend-accent: mat.define-palette(mat.$gray-palette, 600);
+$frontend-accent: mat.define-palette(mat.$orange-palette, 600);
 
-$frontend-warn: mat.define-palette(mat.$red-palette);
+$frontend-warn: mat.define-palette(mat.$red-palette, A700);
 
 $frontend-theme: mat.define-light-theme(
   (
