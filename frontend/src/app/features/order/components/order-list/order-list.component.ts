@@ -1,11 +1,9 @@
-import { OrderCreateComponent } from './../order-create/order-create.component';
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 
-import { Order, Pagination } from '../../models/order';
+import { Order } from '../../models/order';
 import { OrderService } from './../../services/order.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ThisReceiver } from '@angular/compiler';
+import { OrderCreateComponent } from './../order-create/order-create.component';
 
 @Component({
   selector: 'order-list',
@@ -19,7 +17,7 @@ export class OrderListComponent implements OnInit {
   pageSize = 10;
   length!: number;
 
-  constructor(private orderService: OrderService, private diaglog: MatDialog) {}
+  constructor(private orderService: OrderService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.findAllPageable(0, 10);
@@ -44,10 +42,6 @@ export class OrderListComponent implements OnInit {
   }
 
   onCreate() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '60%';
-    this.diaglog.open(OrderCreateComponent);
+    this.dialog.open(OrderCreateComponent);
   }
 }

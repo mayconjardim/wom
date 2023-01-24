@@ -4,7 +4,12 @@
     <div class="container-half-width">
       <mat-form-field appearance="outline" class="date">
         <mat-label>Expected Date</mat-label>
-        <input matInput [matDatepicker]="picker" />
+        <input
+          [formControl]="expectedDate"
+          required
+          matInput
+          [matDatepicker]="picker"
+        />
         <mat-datepicker-toggle
           matIconSuffix
           [for]="picker"
@@ -14,7 +19,7 @@
 
       <mat-form-field appearance="outline" class="select">
         <mat-label>Priority</mat-label>
-        <mat-select>
+        <mat-select [formControl]="priority" required>
           <mat-option value="0">LOW</mat-option>
           <mat-option value="1">HIGH</mat-option>
           <mat-option value="2">CLOSED</mat-option>
@@ -34,7 +39,7 @@
 
       <mat-form-field appearance="outline" class="select">
         <mat-label>Yard</mat-label>
-        <mat-select>
+        <mat-select [formControl]="yard" yard>
           <mat-option value="0">LOW</mat-option>
           <mat-option value="1">HIGH</mat-option>
           <mat-option value="2">CLOSED</mat-option>
@@ -45,7 +50,7 @@
     <div class="container-full-width">
       <mat-form-field appearance="outline" class="input-full">
         <mat-label>General Contractor</mat-label>
-        <input matInput />
+        <input [formControl]="generalContractor" matInput />
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="input-full">
@@ -69,16 +74,17 @@
     <div class="container-full-width">
       <mat-form-field appearance="outline" class="text-area">
         <mat-label>Description</mat-label>
-        <textarea matInput></textarea>
+        <textarea [formControl]="description" required matInput></textarea>
       </mat-form-field>
     </div>
 
     <div class="container-actions">
-      <button mat-icon-button>
-        <mat-icon color="primary">add_circle</mat-icon>
+      <button mat-icon-button color="primary" [disabled]="!validForm()">
+        <mat-icon>add_circle</mat-icon>
       </button>
-      <button mat-icon-button>
-        <mat-icon color="warn">close</mat-icon>
+
+      <button mat-icon-button color="warn">
+        <mat-icon>cancel</mat-icon>
       </button>
     </div>
   </form>
