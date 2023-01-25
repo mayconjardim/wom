@@ -31,4 +31,11 @@ export class OrderService {
   create(order: Order): Observable<Order> {
     return this.http.post<Order>(`${API_CONFIG.baseUrl}/orders`, order);
   }
+
+  update(order: Order): Observable<Order> {
+    return this.http.put<Order>(
+      `${API_CONFIG.baseUrl}/orders/${order.id}`,
+      order
+    );
+  }
 }

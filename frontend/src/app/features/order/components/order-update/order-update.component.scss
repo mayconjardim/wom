@@ -1,0 +1,48 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 1rem;
+  font-size: 12px;
+
+  h1 {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  &-half-width {
+    width: 100%;
+    display: flex;
+
+    .date {
+      width: 50%;
+      margin: auto 0.5rem;
+    }
+
+    .select {
+      width: 50%;
+      margin: auto 0.5rem;
+    }
+
+    .input {
+      width: 50%;
+      margin: auto 0.5rem;
+    }
+  }
+
+  &-full-width {
+    width: 97%;
+    margin: 0 auto;
+
+    .input-full {
+      width: 100%;
+    }
+
+    .text-area {
+      width: 100%;
+      textarea {
+        min-height: 4rem;
+      }
+    }
+  }
+}

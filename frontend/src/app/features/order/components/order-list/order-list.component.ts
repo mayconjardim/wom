@@ -1,3 +1,4 @@
+import { OrderUpdateComponent } from './../order-update/order-update.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -39,12 +40,16 @@ export class OrderListComponent implements OnInit {
       });
   }
 
-  orderStatus(status: number) {
+  orderByStatus(status: number) {
     this.findAllByStatusPageable(status);
   }
 
-  openCreate(): void {
+  openDialogCreate(): void {
     this.dialog.open(OrderCreateComponent);
+  }
+
+  openDialogUpdate(): void {
+    this.dialog.open(OrderUpdateComponent);
   }
 
   pageChangeEvent(event: number) {

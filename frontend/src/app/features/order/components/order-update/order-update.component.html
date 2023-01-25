@@ -1,1 +1,109 @@
-<p>order-update works!</p>
+<div class="container">
+  <form class="container-form">
+    <h1>Create New Order</h1>
+    <div class="container-half-width">
+      <mat-form-field appearance="fill" class="date">
+        <mat-label>Expected Date</mat-label>
+        <input
+          [(ngModel)]="order.expectedDate"
+          [formControl]="expectedDate"
+          required
+          matInput
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="select">
+        <mat-label>Priority</mat-label>
+        <mat-select
+          [(ngModel)]="order.orderPriority"
+          [formControl]="priority"
+          required
+        >
+          <mat-option value="0">LOW</mat-option>
+          <mat-option value="1">MEDIUM</mat-option>
+          <mat-option value="2">HIGH</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="container-half-width">
+      <mat-form-field appearance="fill" class="input">
+        <mat-label> {{ manager.name }}</mat-label>
+        <input matInput disabled />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="select">
+        <mat-label>Yard</mat-label>
+        <mat-select [formControl]="yardId">
+          <mat-option
+            *ngFor="let item of yards"
+            value="{{ item.id }}"
+            (click)="getYard($event)"
+            >{{ item.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="container-full-width">
+      <mat-form-field appearance="fill" class="input-full">
+        <mat-label>General Contractor</mat-label>
+        <input
+          [(ngModel)]="order.generalContractor"
+          [formControl]="generalContractor"
+          matInput
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input-full">
+        <mat-label>Street Address</mat-label>
+        <input [(ngModel)]="order.address" [formControl]="address" matInput />
+      </mat-form-field>
+    </div>
+
+    <div class="container-half-width">
+      <mat-form-field appearance="fill" class="input">
+        <mat-label>Job Site</mat-label>
+        <input [(ngModel)]="order.jobSite" [formControl]="jobSite" matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input">
+        <mat-label>City</mat-label>
+        <input [(ngModel)]="order.city" [formControl]="city" matInput />
+      </mat-form-field>
+    </div>
+
+    <div class="container-full-width">
+      <mat-form-field appearance="fill" class="text-area">
+        <mat-label>Description</mat-label>
+        <textarea
+          [(ngModel)]="order.description"
+          [formControl]="description"
+          required
+          matInput
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="container-actions">
+      <a
+        mat-icon-button
+        color="primary"
+        [disabled]="!validForm()"
+        (click)="createOrder($event)"
+      >
+        <mat-icon>note_add</mat-icon>
+      </a>
+
+      <a mat-icon-button color="warn" (click)="close($event)">
+        <mat-icon>disabled_by_default</mat-icon>
+      </a>
+    </div>
+  </form>
+</div>

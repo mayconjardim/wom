@@ -1,12 +1,12 @@
-import { ToastrService } from 'ngx-toastr';
-import { UserService } from './../../../users/services/user.service';
-import { MatDialogRef } from '@angular/material/dialog';
-import { OrderService } from './../../services/order.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormRecord, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/features/users/models/user';
+
 import { Order } from '../../models/order';
-import { Route, Router } from '@angular/router';
+import { UserService } from './../../../users/services/user.service';
+import { OrderService } from './../../services/order.service';
 
 @Component({
   selector: 'order-create',
@@ -111,6 +111,7 @@ export class OrderCreateComponent implements OnInit {
       (res) => {
         this.toastService.success('Order created successfully', 'New Order');
         this.dialogRef.close();
+        location.reload();
       },
       (ex) => {
         this.toastService.error(ex.error.error);
