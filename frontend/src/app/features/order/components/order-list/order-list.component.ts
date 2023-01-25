@@ -1,3 +1,4 @@
+import { OrderDeleteComponent } from './../order-delete/order-delete.component';
 import { OrderReadComponent } from './../order-read/order-read.component';
 import { OrderUpdateComponent } from './../order-update/order-update.component';
 import { Component, OnInit } from '@angular/core';
@@ -61,6 +62,12 @@ export class OrderListComponent implements OnInit {
 
   openDialogRead(id: number): void {
     this.dialog.open(OrderReadComponent, {
+      data: { id: id },
+    });
+  }
+
+  openDialogDelete(id: number): void {
+    this.dialog.open(OrderDeleteComponent, {
       data: { id: id },
     });
   }

@@ -80,7 +80,7 @@ export class OrderUpdateComponent implements OnInit {
   updateOrder(ev: any) {
     this.orderService.update(this.order).subscribe(
       (res) => {
-        this.toastService.success('Order updated successfully', 'New Order');
+        this.toastService.success('Order updated successfully', 'Update Order');
         this.dialogRef.close();
         location.reload();
       },

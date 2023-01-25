@@ -41,4 +41,8 @@ export class OrderService {
       order
     );
   }
+
+  delete(id: any): Observable<Order> {
+    return this.http.delete<Order>(`${API_CONFIG.baseUrl}/orders/${id}`);
+  }
 }

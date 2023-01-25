@@ -68,7 +68,11 @@
             ><mat-icon>assignment</mat-icon></a
           >
 
-          <a routerLink="home"><mat-icon>delete_forever</mat-icon></a>
+          <ng-container *ngIf="isManager()">
+            <a (click)="openDialogDelete(order.id!)"
+              ><mat-icon>delete_forever</mat-icon></a
+            ></ng-container
+          >
         </div>
       </mat-expansion-panel>
     </mat-accordion>

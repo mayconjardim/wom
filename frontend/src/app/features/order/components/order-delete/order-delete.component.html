@@ -1,1 +1,16 @@
-<p>order-delete works!</p>
+<div class="container">
+  <h3>Are you sure?</h3>
+  <div class="container-body">
+    <p>Confirm to delete order id: {{ order.id }}</p>
+  </div>
+
+  <div class="container-actions">
+    <a mat-icon-button color="primary" (click)="deleteOrder($event)">
+      <mat-icon>delete</mat-icon>
+    </a>
+
+    <a mat-icon-button color="warn" (click)="close($event)">
+      <mat-icon>disabled_by_default</mat-icon>
+    </a>
+  </div>
+</div>
