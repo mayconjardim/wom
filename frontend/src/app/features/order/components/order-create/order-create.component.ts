@@ -117,4 +117,8 @@ export class OrderCreateComponent implements OnInit {
       }
     );
   }
+
+  close(ev: any) {
+    this.dialogRef.close();
+  }
 }

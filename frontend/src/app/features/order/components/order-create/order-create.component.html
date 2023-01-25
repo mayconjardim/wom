@@ -98,12 +98,12 @@
         [disabled]="!validForm()"
         (click)="createOrder($event)"
       >
-        <mat-icon>add_circle</mat-icon>
+        <mat-icon>note_add</mat-icon>
       </a>
 
-      <button mat-icon-button color="warn">
-        <mat-icon>cancel</mat-icon>
-      </button>
+      <a mat-icon-button color="warn" (click)="close($event)">
+        <mat-icon>disabled_by_default</mat-icon>
+      </a>
     </div>
   </form>
 </div>
