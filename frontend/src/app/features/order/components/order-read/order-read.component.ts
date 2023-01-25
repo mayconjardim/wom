@@ -1,10 +1,18 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, Validators } from '@angular/forms';
 import { OrderService } from '../../services/order.service';
 import { OrderUpdateComponent } from '../order-update/order-update.component';
 import { Order } from '../../models/order';
+import { jsPDF } from 'jspdf';
+import domtoimage from 'dom-to-image';
 
 @Component({
   selector: 'order-read',
@@ -12,6 +20,8 @@ import { Order } from '../../models/order';
   styleUrls: ['./order-read.component.scss'],
 })
 export class OrderReadComponent implements OnInit {
+  @ViewChild('content', { static: false }) el!: ElementRef;
+
   order: Order = {
     expectedDate: '',
     deliveryDate: '',
@@ -50,8 +60,24 @@ export class OrderReadComponent implements OnInit {
     );
   }
 
-  printPage() {
-    window.print();
+  openPDF(): void {
+    const print = document.getElementById('print');
+
+    domtoimage.toPng(print!).then((imgData) => {
+      const doc = new jsPDF('p', 'mm', 'a5');
+      const imgProps = doc.getImageProperties(imgData);
+      const pdfWidth = doc.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      doc.save(
+        'wallacebp-order-id-' +
+          this.order.id +
+          '-' +
+          this.order.generalContractor +
+          '.pdf'
+      );
+    });
   }
 
   close(ev: any) {

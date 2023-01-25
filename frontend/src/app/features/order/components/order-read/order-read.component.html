@@ -1,4 +1,4 @@
-<div class="container-box" id="printable">
+<div class="container-box" id="print">
   <table cellpadding="0" cellspacing="0">
     <tr class="top">
       <td colspan="2">
@@ -64,18 +64,13 @@
       ></textarea>
     </mat-form-field>
   </div>
+</div>
+<div mat-dialog-actions class="actions">
+  <a mat-icon-button color="primary" (click)="openPDF()">
+    <mat-icon>picture_as_pdf</mat-icon>
+  </a>
 
-  <div class="container-actions" id="not-print">
-    <a mat-icon-button color="primary" (click)="printPage()">
-      <mat-icon>print</mat-icon>
-    </a>
-
-    <a mat-icon-button color="primary">
-      <mat-icon>picture_as_pdf</mat-icon>
-    </a>
-
-    <a mat-icon-button color="warn" (click)="close($event)">
-      <mat-icon>disabled_by_default</mat-icon>
-    </a>
-  </div>
+  <a mat-icon-button color="warn" (click)="close($event)">
+    <mat-icon>disabled_by_default</mat-icon>
+  </a>
 </div>
