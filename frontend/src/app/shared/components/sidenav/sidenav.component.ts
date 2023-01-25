@@ -33,7 +33,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-  title = 'home';
   @ViewChild('drawer') drawer: any;
 
   isSticky: boolean = false;

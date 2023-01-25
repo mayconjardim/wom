@@ -18,6 +18,7 @@ import { OrderCreateComponent } from './components/order-create/order-create.com
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { OrderUpdateComponent } from './components/order-update/order-update.component';
 import { OrderReadComponent } from './components/order-read/order-read.component';
+import { OrderDeleteComponent } from './components/order-delete/order-delete.component';
 
 export const routes: Routes = [{ path: '', component: OrderListComponent }];
 
@@ -27,6 +28,7 @@ export const routes: Routes = [{ path: '', component: OrderListComponent }];
     OrderCreateComponent,
     OrderUpdateComponent,
     OrderReadComponent,
+    OrderDeleteComponent,
   ],
   imports: [
     CommonModule,
