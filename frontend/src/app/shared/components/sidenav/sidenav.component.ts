@@ -62,6 +62,10 @@ export class SidenavComponent implements OnInit {
     this.toast.info('You have been logged out!', 'Logout');
   }
 
+  isAdmin(): boolean {
+    return localStorage.getItem('admin') === 'true';
+  }
+
   get isHandset(): boolean {
     return this.breakpointObserver.isMatched(Breakpoints.Handset);
   }

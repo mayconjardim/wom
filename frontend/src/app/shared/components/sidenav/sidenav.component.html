@@ -35,9 +35,9 @@
           ><mat-icon>calculate</mat-icon>Calculator</a
         >
 
-        <!-- ADMIN -->
-        <a mat-list-item routerLink="home"><mat-icon>group</mat-icon>Users</a>
-        <!-- ADMIN -->
+        <ng-container *ngIf="isAdmin()">
+          <a mat-list-item routerLink="home"><mat-icon>group</mat-icon>Users</a>
+        </ng-container>
 
         <a mat-list-item (click)="logout()"
           ><mat-icon>logout</mat-icon>Logout</a

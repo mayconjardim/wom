@@ -45,6 +45,10 @@ export class OrderListComponent implements OnInit {
     this.findAllByStatusPageable(status);
   }
 
+  isManager(): boolean {
+    return localStorage.getItem('role') === 'Manager';
+  }
+
   openDialogCreate(): void {
     this.dialog.open(OrderCreateComponent);
   }

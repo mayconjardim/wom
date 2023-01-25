@@ -38,12 +38,14 @@ export class AuthService {
     authToken: string,
     userName: string,
     userId: string,
-    role: string
+    role: string,
+    admin: string
   ) {
     localStorage.setItem('token', authToken);
     localStorage.setItem('userName', userName);
     localStorage.setItem('userId', userId);
     localStorage.setItem('role', role);
+    localStorage.setItem('admin', admin);
   }
 
   isAuthenticated() {

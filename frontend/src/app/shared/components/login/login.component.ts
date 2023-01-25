@@ -61,7 +61,8 @@ export class LoginComponent {
       response['access_token'],
       response['userName'],
       response['userId'],
-      response['role']
+      response['role'],
+      response['admin']
     );
     this.toast.success('Logged in successfully!', 'Login');
     this.router.navigate(['']);
