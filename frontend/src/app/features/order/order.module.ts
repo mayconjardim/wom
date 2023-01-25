@@ -17,6 +17,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { OrderCreateComponent } from './components/order-create/order-create.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { OrderUpdateComponent } from './components/order-update/order-update.component';
+import { OrderReadComponent } from './components/order-read/order-read.component';
 
 export const routes: Routes = [{ path: '', component: OrderListComponent }];
 
@@ -25,6 +26,7 @@ export const routes: Routes = [{ path: '', component: OrderListComponent }];
     OrderListComponent,
     OrderCreateComponent,
     OrderUpdateComponent,
+    OrderReadComponent,
   ],
   imports: [
     CommonModule,
