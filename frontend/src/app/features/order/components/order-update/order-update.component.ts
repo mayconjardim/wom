@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/features/users/models/user';
-
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Order } from '../../models/order';
 import { UserService } from './../../../users/services/user.service';
 import { OrderService } from './../../services/order.service';
@@ -34,7 +34,8 @@ export class OrderUpdateComponent implements OnInit {
 
   order: Order = {
     expectedDate: '',
-    orderStatus: '0',
+    deliveryDate: '',
+    orderStatus: '',
     orderPriority: '',
     generalContractor: '',
     jobSite: '',
@@ -47,8 +48,8 @@ export class OrderUpdateComponent implements OnInit {
   managers!: User[];
   yards!: User[];
 
-  expectedDate: FormControl = new FormControl(null, [Validators.required]);
-  priority: FormControl = new FormControl(null, [Validators.required]);
+  deliveryDate: FormControl = new FormControl(null, [Validators.required]);
+  orderStatus: FormControl = new FormControl(null, [Validators.required]);
   yardId: FormControl = new FormControl(null, [Validators.required]);
   generalContractor: FormControl = new FormControl(null, [Validators.required]);
   address: FormControl = new FormControl(null);
@@ -57,6 +58,7 @@ export class OrderUpdateComponent implements OnInit {
   description: FormControl = new FormControl(null, [Validators.required]);
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { id: number },
     private orderService: OrderService,
     private userService: UserService,
     private toastService: ToastrService,
@@ -64,7 +66,38 @@ export class OrderUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.order.id = this.data.id;
+    this.findOrderById();
     this.findAllUsers();
+  }
+
+  debug() {
+    console.log(this.order);
+  }
+
+  updateOrder(ev: any) {
+    this.orderService.update(this.order).subscribe(
+      (res) => {
+        this.toastService.success('Order updated successfully', 'New Order');
+        this.dialogRef.close();
+        location.reload();
+      },
+      (ex) => {
+        console.log(ex);
+        this.toastService.error(ex.error.error);
+      }
+    );
+  }
+
+  findOrderById() {
+    this.orderService.findById(this.order.id).subscribe(
+      (resp) => {
+        this.order = resp;
+      },
+      (ex) => {
+        this.toastService.error(ex.error.error);
+      }
+    );
   }
 
   findAllUsers(): void {
@@ -97,25 +130,9 @@ export class OrderUpdateComponent implements OnInit {
 
   validForm(): boolean {
     return (
-      this.expectedDate.valid &&
-      this.priority.valid &&
+      this.orderStatus.valid &&
       this.generalContractor.valid &&
-      this.yardId.valid &&
       this.description.valid
-    );
-  }
-
-  createOrder(ev: any) {
-    this.order.users.push({ id: this.manager.id }, { id: this.yard.id });
-    this.orderService.create(this.order).subscribe(
-      (res) => {
-        this.toastService.success('Order created successfully', 'New Order');
-        this.dialogRef.close();
-        location.reload();
-      },
-      (ex) => {
-        this.toastService.error(ex.error.error);
-      }
     );
   }
 

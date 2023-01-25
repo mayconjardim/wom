@@ -48,8 +48,10 @@ export class OrderListComponent implements OnInit {
     this.dialog.open(OrderCreateComponent);
   }
 
-  openDialogUpdate(): void {
-    this.dialog.open(OrderUpdateComponent);
+  openDialogUpdate(id: number): void {
+    this.dialog.open(OrderUpdateComponent, {
+      data: { id: id },
+    });
   }
 
   pageChangeEvent(event: number) {

@@ -9,8 +9,11 @@ import { API_CONFIG } from './../../../core/config/api.config';
   providedIn: 'root',
 })
 export class OrderService {
-  [x: string]: any;
   constructor(private http: HttpClient) {}
+
+  findById(id: any): Observable<Order> {
+    return this.http.get<Order>(`${API_CONFIG.baseUrl}/orders/${id}`);
+  }
 
   findAllPageable(page: number, pageSize: number): Observable<Pagination> {
     return this.http.get<Pagination>(
