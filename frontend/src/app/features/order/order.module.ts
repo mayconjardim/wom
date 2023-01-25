@@ -16,11 +16,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { OrderCreateComponent } from './components/order-create/order-create.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
+import { OrderUpdateComponent } from './components/order-update/order-update.component';
 
 export const routes: Routes = [{ path: '', component: OrderListComponent }];
 
 @NgModule({
-  declarations: [OrderListComponent, OrderCreateComponent],
+  declarations: [OrderListComponent, OrderCreateComponent, OrderUpdateComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
