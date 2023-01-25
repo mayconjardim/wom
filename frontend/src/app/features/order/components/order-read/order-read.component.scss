@@ -1,0 +1,96 @@
+.container-box {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #eee;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  font-size: 13px;
+  line-height: 24px;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  color: #555;
+
+  table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+
+    span {
+      font-weight: 700;
+    }
+
+    td {
+      padding: 5px;
+      vertical-align: top;
+    }
+    tr td:nth-child(2) {
+      text-align: right;
+    }
+    tr.top {
+      table td {
+        padding-bottom: 20px;
+      }
+      table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+      }
+    }
+    tr.information {
+      table td {
+        padding-bottom: 40px;
+      }
+    }
+    tr.heading td {
+      background: #eee;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+    }
+    tr.details td {
+      padding-bottom: 20px;
+    }
+    tr.item td {
+      border-bottom: 1px solid #eee;
+      &.last td {
+        border-bottom: none;
+      }
+    }
+    tr.total td:nth-child(2) {
+      border-top: 2px solid #eee;
+      font-weight: bold;
+    }
+  }
+}
+
+.summary {
+  mat-form-field {
+    width: 100%;
+    textarea {
+      height: 10rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container-box table tr.top table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  .container-box table tr.information table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+@media print {
+  .container-box {
+    margin: 0 auto;
+    width: 100vh;
+  }
+
+  #not-print {
+    visibility: hidden;
+  }
+}

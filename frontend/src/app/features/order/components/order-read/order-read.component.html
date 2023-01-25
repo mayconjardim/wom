@@ -1,1 +1,81 @@
-<p>order-read works!</p>
+<div class="container-box" id="printable">
+  <table cellpadding="0" cellspacing="0">
+    <tr class="top">
+      <td colspan="2">
+        <table>
+          <tr>
+            <td class="title">
+              <img
+                src="assets/images/logo-wbp.svg"
+                style="width: 90%; max-width: 300px"
+              />
+            </td>
+
+            <td>
+              <span>Order #: </span> {{ order.id }}<br />
+              <span>Start Date:</span> {{ order.startDate | date : "MM/dd/yyyy"
+              }}<br />
+              <span>Expected Date:</span>
+              {{ order.expectedDate | date : "MM/dd/yyyy" }}<br />
+              <span>Delivery Date:</span>
+              {{ order.deliveryDate | date : "MM/dd/yyyy" }}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="information">
+      <td colspan="2">
+        <table>
+          <tr>
+            <td>
+              <span>GC:</span>
+              {{ order.generalContractor }}<br />
+              <span>Address:</span>
+              {{ order.address }}<br />
+              <span>Job Site:</span>
+              {{ order.jobSite }}<br />
+              <span>City:</span>
+              {{ order.city }}
+            </td>
+
+            <td>
+              <span>Project Manager:</span> Rodrigo Farias<br />
+              <span>Yard:</span> Travis Wilson<br />
+              <span>Driver:</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="heading">
+      <td>Order Summary</td>
+    </tr>
+  </table>
+  <div class="summary">
+    <mat-form-field appearance="fill">
+      <textarea
+        [(ngModel)]="order.description"
+        [formControl]="description"
+        matInput
+        [readonly]="true"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="container-actions" id="not-print">
+    <a mat-icon-button color="primary" (click)="printPage()">
+      <mat-icon>print</mat-icon>
+    </a>
+
+    <a mat-icon-button color="primary">
+      <mat-icon>picture_as_pdf</mat-icon>
+    </a>
+
+    <a mat-icon-button color="warn" (click)="close($event)">
+      <mat-icon>disabled_by_default</mat-icon>
+    </a>
+  </div>
+</div>

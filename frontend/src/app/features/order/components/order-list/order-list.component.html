@@ -62,8 +62,10 @@
           </table>
         </mat-expansion-panel-header>
         <div class="container-card-actions">
-          <a (click)="openDialogUpdate(order.id!)"><mat-icon>edit</mat-icon></a
-          ><a routerLink="home"><mat-icon>assignment</mat-icon></a>
+          <a (click)="openDialogUpdate(order.id!)"><mat-icon>edit</mat-icon></a>
+          <a (click)="openDialogRead(order.id!)"
+            ><mat-icon>assignment</mat-icon></a
+          >
 
           <a routerLink="home"><mat-icon>delete_forever</mat-icon></a>
         </div>

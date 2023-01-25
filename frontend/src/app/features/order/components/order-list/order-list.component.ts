@@ -1,3 +1,4 @@
+import { OrderReadComponent } from './../order-read/order-read.component';
 import { OrderUpdateComponent } from './../order-update/order-update.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -50,6 +51,12 @@ export class OrderListComponent implements OnInit {
 
   openDialogUpdate(id: number): void {
     this.dialog.open(OrderUpdateComponent, {
+      data: { id: id },
+    });
+  }
+
+  openDialogRead(id: number): void {
+    this.dialog.open(OrderReadComponent, {
       data: { id: id },
     });
   }
