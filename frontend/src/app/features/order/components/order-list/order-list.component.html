@@ -8,13 +8,13 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="orderOpen()">
         <mat-icon color="primary">receipt_long</mat-icon>OPEN
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="orderOpen()">
         <mat-icon color="accent">receipt_long</mat-icon>PROCESSING
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="orderOpen()">
         <mat-icon color="warn">receipt_long</mat-icon>CLOSED
       </button>
     </mat-menu>
@@ -63,8 +63,9 @@
         </mat-expansion-panel-header>
         <div class="container-card-actions">
           <a routerLink="home"><mat-icon>edit</mat-icon></a
-          ><a routerLink="home"><mat-icon>assignment</mat-icon></a
-          ><a routerLink="home"><mat-icon>delete_forever</mat-icon></a>
+          ><a routerLink="home"><mat-icon>assignment</mat-icon></a>
+
+          <a routerLink="home"><mat-icon>delete_forever</mat-icon></a>
         </div>
       </mat-expansion-panel>
     </mat-accordion>

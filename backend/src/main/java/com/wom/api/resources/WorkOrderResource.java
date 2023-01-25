@@ -20,7 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.wom.api.dto.WorkOrderDTO;
 import com.wom.api.services.WorkOrderService;
 
-
 @RestController
 @RequestMapping(value = "/orders")
 public class WorkOrderResource {
@@ -38,6 +37,12 @@ public class WorkOrderResource {
 	public ResponseEntity<WorkOrderDTO> findById(@PathVariable Long id) {
 		WorkOrderDTO dto = orderSevice.findById(id);
 		return ResponseEntity.ok().body(dto);
+	}
+
+	@GetMapping(value = "/status/{status}")
+	public ResponseEntity<Page<WorkOrderDTO>> findByOrderStatus(@PathVariable Integer status, Pageable pageable) {
+		Page<WorkOrderDTO> list = orderSevice.findByOrderStatus(status, pageable);
+		return ResponseEntity.ok().body(list);
 	}
 
 	@PostMapping

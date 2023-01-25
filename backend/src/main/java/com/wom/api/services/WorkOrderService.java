@@ -43,6 +43,14 @@ public class WorkOrderService {
 		WorkOrder entity = obj.orElseThrow(() -> new ResourceNotFoundException(" Id not found: " + id));
 		return new WorkOrderDTO(entity);
 	}
+	
+	@Transactional(readOnly = true)
+	public Page<WorkOrderDTO> findByOrderStatus(Integer status, Pageable pageable) {
+		Page<WorkOrder> page = orderRepository.findByOrderStatus(status, pageable);
+		return page.map(order -> new WorkOrderDTO(order));
+
+	}
+
 
 	@Transactional
 	public WorkOrderDTO insert(WorkOrderDTO dto) {
