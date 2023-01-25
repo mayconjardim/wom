@@ -30,6 +30,23 @@ export class OrderListComponent implements OnInit {
     });
   }
 
+  findAllByStatusPageable(status: number) {
+    this.orderService
+      .findAllByStatusPageable(status, this.page, this.pageSize)
+      .subscribe((res) => {
+        this.orders = res.content;
+        this.length = res.totalElements;
+      });
+  }
+
+  orderStatus(status: number) {
+    this.findAllByStatusPageable(status);
+  }
+
+  openCreate(): void {
+    this.dialog.open(OrderCreateComponent);
+  }
+
   pageChangeEvent(event: number) {
     this.page = event;
     this.findAllPageable(this.page - 1, this.pageSize);
@@ -39,9 +56,5 @@ export class OrderListComponent implements OnInit {
       left: 0,
       behavior: 'smooth',
     });
-  }
-
-  openCreate(): void {
-    this.dialog.open(OrderCreateComponent);
   }
 }

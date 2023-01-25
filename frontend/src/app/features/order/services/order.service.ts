@@ -18,6 +18,16 @@ export class OrderService {
     );
   }
 
+  findAllByStatusPageable(
+    status: number,
+    page: number,
+    pageSize: number
+  ): Observable<Pagination> {
+    return this.http.get<Pagination>(
+      `${API_CONFIG.baseUrl}/orders/status/${status}?page=${page}&size=${pageSize}&sort=id,desc`
+    );
+  }
+
   create(order: Order): Observable<Order> {
     return this.http.post<Order>(`${API_CONFIG.baseUrl}/orders`, order);
   }

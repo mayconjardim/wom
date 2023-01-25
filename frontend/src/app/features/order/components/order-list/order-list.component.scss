@@ -14,7 +14,7 @@
   &-card {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
 
     mat-accordion {
       mat-expansion-panel {

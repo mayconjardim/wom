@@ -8,13 +8,13 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="orderOpen()">
+      <button mat-menu-item (click)="orderStatus(0)">
         <mat-icon color="primary">receipt_long</mat-icon>OPEN
       </button>
-      <button mat-menu-item (click)="orderOpen()">
+      <button mat-menu-item (click)="orderStatus(1)">
         <mat-icon color="accent">receipt_long</mat-icon>PROCESSING
       </button>
-      <button mat-menu-item (click)="orderOpen()">
+      <button mat-menu-item (click)="orderStatus(2)">
         <mat-icon color="warn">receipt_long</mat-icon>CLOSED
       </button>
     </mat-menu>
