@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wom.api.entities.enums.OrderPriority;
 import com.wom.api.entities.enums.OrderStatus;
@@ -28,13 +27,10 @@ public class WorkOrder implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date startDate = Date.from(Instant.now());
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date expectedDate;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date deliveryDate;
 
 	private Integer orderStatus;

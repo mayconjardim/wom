@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wom.api.entities.User;
 import com.wom.api.entities.WorkOrder;
@@ -20,13 +19,10 @@ public class WorkOrderDTO implements Serializable {
 
 	private Long id;
 
-	@JsonFormat(pattern = "MM-dd-yyyy")
 	private Date startDate = Date.from(Instant.now());
 
-	@JsonFormat(pattern = "MM-dd-yyyy")
 	private Date expectedDate;
 
-	@JsonFormat(pattern = "MM-dd-yyyy")
 	private Date deliveryDate;
 
 	@NotNull

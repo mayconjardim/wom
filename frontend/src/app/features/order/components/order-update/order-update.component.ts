@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Order } from '../../models/order';
 import { UserService } from './../../../users/services/user.service';
 import { OrderService } from './../../services/order.service';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'order-update',
@@ -14,6 +15,12 @@ import { OrderService } from './../../services/order.service';
   styleUrls: ['./order-update.component.scss'],
 })
 export class OrderUpdateComponent implements OnInit {
+  events: string[] = [];
+
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.events.push(`${type}: ${event.value}`);
+  }
+
   manager: User = {
     firstName: '',
     lastName: '',
