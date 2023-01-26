@@ -19,4 +19,8 @@ export class UserService {
       `${API_CONFIG.baseUrl}/users?page=${page}&size=${pageSize}&sort=id,desc`
     );
   }
+
+  findById(id: any): Observable<User> {
+    return this.http.get<User>(`${API_CONFIG.baseUrl}/users/${id}`);
+  }
 }
