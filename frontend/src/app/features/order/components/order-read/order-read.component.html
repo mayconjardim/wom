@@ -57,6 +57,9 @@
   <div class="summary">
     <mat-form-field appearance="fill">
       <textarea
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
         [(ngModel)]="order.description"
         [formControl]="description"
         matInput

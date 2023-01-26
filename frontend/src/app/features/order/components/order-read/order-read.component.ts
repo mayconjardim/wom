@@ -11,6 +11,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { OrderService } from '../../services/order.service';
 import { OrderUpdateComponent } from '../order-update/order-update.component';
 import { Order } from '../../models/order';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { jsPDF } from 'jspdf';
 import domtoimage from 'dom-to-image';
 
@@ -20,7 +21,7 @@ import domtoimage from 'dom-to-image';
   styleUrls: ['./order-read.component.scss'],
 })
 export class OrderReadComponent implements OnInit {
-  @ViewChild('content', { static: false }) el!: ElementRef;
+  @ViewChild('autosize') autosize!: CdkTextareaAutosize;
 
   order: Order = {
     expectedDate: '',
