@@ -1,6 +1,7 @@
 package com.wom.api.services;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -33,6 +34,7 @@ public class WorkOrderService {
 	@Transactional(readOnly = true)
 	public Page<WorkOrderDTO> findAllPaged(Pageable pageable) {
 		Page<WorkOrder> page = orderRepository.findAll(pageable);
+		orderRepository.findWorkOrdersUsers(page.stream().collect(Collectors.toList()));
 		return page.map(order -> new WorkOrderDTO(order));
 
 	}

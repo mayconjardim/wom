@@ -3,7 +3,6 @@ INSERT INTO work_order (start_date, expected_date, delivery_date, order_status, 
 INSERT INTO work_order (start_date, expected_date, delivery_date, order_status, order_priority, general_contractor, job_site, address, city, description ) VALUES (NOW(), NOW(), '2022-01-20', 2, 2, 'Luke Brown', 'Fallon Center', '620 Atlantic Ave', 'Brooklyn', 'Trade Kyrie now!');
 INSERT INTO work_order (start_date, expected_date, delivery_date, order_status, order_priority, general_contractor, job_site, address, city, description ) VALUES (NOW(), NOW(), null, 0, 0, 'Rebecca King', 'Washington Center', '1111 S Figueroa St', 'Los Angeles', 'Help Plis!');
 INSERT INTO work_order (start_date, expected_date, delivery_date, order_status, order_priority, general_contractor, job_site, address, city, description ) VALUES (NOW(), NOW(), null, 1, 1, 'Joshua Thompson', 'Overland  Airlines Center', '2500 Victory Ave', 'Dallas', 'Im the king now!');
-INSERT INTO work_order (start_date, expected_date, delivery_date, order_status, order_priority, general_contractor, job_site, address, city, description ) VALUES (NOW(), NOW(), '2022-01-20', 2, 2, 'Jack Thomas, 'Decatur Center', '620 Atlantic Ave', 'Brooklyn', 'Trade Kyrie now!');
 INSERT INTO work_order (start_date, expected_date, delivery_date, order_status, order_priority, general_contractor, job_site, address, city, description ) VALUES (NOW(), NOW(), null, 0, 0, 'Daniel Ramirez', 'Arbor Center', '1111 S Figueroa St', 'Los Angeles', 'Help Plis!');
 INSERT INTO work_order (start_date, expected_date, delivery_date, order_status, order_priority, general_contractor, job_site, address, city, description ) VALUES (NOW(), NOW(), null, 1, 1, 'Heather James', 'Casper', '2500 Victory Ave', 'Dallas', 'Im the king now!');
 INSERT INTO work_order (start_date, expected_date, delivery_date, order_status, order_priority, general_contractor, job_site, address, city, description ) VALUES (NOW(), NOW(), '2022-01-20', 2, 2, 'Jacob Stone', 'Cedar Rapids Center', '620 Atlantic Ave', 'Brooklyn', 'Trade Kyrie now!');
@@ -40,7 +39,7 @@ INSERT INTO order_user (order_id, user_id) VALUES (4, 2);
 INSERT INTO order_user (order_id, user_id) VALUES (4, 3);
 
 INSERT INTO order_user (order_id, user_id) VALUES (5, 2);
-INSERT INTO order_user (order_id, user_id) VALUES (6, 3);
+INSERT INTO order_user (order_id, user_id) VALUES (5, 3);
 
 INSERT INTO order_user (order_id, user_id) VALUES (6, 2);
 INSERT INTO order_user (order_id, user_id) VALUES (6, 3);
@@ -66,7 +65,6 @@ INSERT INTO order_user (order_id, user_id) VALUES (12, 3);
 INSERT INTO order_user (order_id, user_id) VALUES (13, 2);
 INSERT INTO order_user (order_id, user_id) VALUES (13, 3);
 
-INSERT INTO order_user (order_id, user_id) VALUES (14, 2);
-INSERT INTO order_user (order_id, user_id) VALUES (14, 3);
+
 
 
