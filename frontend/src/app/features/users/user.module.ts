@@ -7,11 +7,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { UserCreateComponent } from './components/user-create/user-create.component';
 
 export const routes: Routes = [{ path: '', component: UserListComponent }];
 
 @NgModule({
-  declarations: [UserListComponent],
+  declarations: [UserListComponent, UserCreateComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
