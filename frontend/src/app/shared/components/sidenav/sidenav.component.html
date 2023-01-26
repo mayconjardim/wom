@@ -36,7 +36,9 @@
         >
 
         <ng-container *ngIf="isAdmin()">
-          <a mat-list-item routerLink="home"><mat-icon>group</mat-icon>Users</a>
+          <a mat-list-item routerLink="users"
+            ><mat-icon>group</mat-icon>Users</a
+          >
         </ng-container>
 
         <a mat-list-item (click)="logout()"
