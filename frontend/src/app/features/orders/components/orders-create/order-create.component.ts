@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -7,6 +8,7 @@ import { User } from 'src/app/features/users/models/user';
 import { Order } from '../../models/order';
 import { UserService } from '../../../users/services/user.service';
 import { OrderService } from '../../services/order.service';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'order-create',
@@ -60,7 +62,8 @@ export class OrderCreateComponent implements OnInit {
     private orderService: OrderService,
     private userService: UserService,
     private toastService: ToastrService,
-    public dialogRef: MatDialogRef<OrderCreateComponent>
+    public dialogRef: MatDialogRef<OrderCreateComponent>,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -107,19 +110,30 @@ export class OrderCreateComponent implements OnInit {
 
   createOrder(ev: any) {
     this.order.users.push({ id: this.manager.id }, { id: this.yard.id });
-    this.orderService.create(this.order).subscribe(
-      (res) => {
-        this.toastService.success('Order created successfully', 'New Order');
-        this.dialogRef.close();
-        location.reload();
-      },
-      (ex) => {
-        this.toastService.error(ex.error.error);
-      }
-    );
+    this.orderService
+      .create(this.order)
+      .pipe(
+        tap((res) => {
+          this.toastService.success('Order created successfully', 'New Order');
+          this.dialogRef.close();
+          this.reloadCurrentRoute();
+        }),
+        catchError((err) => {
+          this.toastService.error(err.error.error);
+          return of(err);
+        })
+      )
+      .subscribe();
   }
 
   close(ev: any) {
     this.dialogRef.close();
+  }
+
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }

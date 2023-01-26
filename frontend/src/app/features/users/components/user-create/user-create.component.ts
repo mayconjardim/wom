@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../models/user';
 import { ToastrService } from 'ngx-toastr';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'user-create',
@@ -36,7 +37,8 @@ export class UserCreateComponent implements OnInit {
     private userService: UserService,
     public dialogRef: MatDialogRef<UserCreateComponent>,
     private formBuilder: FormBuilder,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -58,7 +60,7 @@ export class UserCreateComponent implements OnInit {
       (res) => {
         this.toastService.success('User created successfully', 'New User');
         this.dialogRef.close();
-        location.reload();
+        this.reloadCurrentRoute();
       },
       (ex) => {
         this.toastService.error(ex.error.error);
@@ -78,5 +80,12 @@ export class UserCreateComponent implements OnInit {
 
   close(ev: any) {
     this.dialogRef.close();
+  }
+
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { OrderService } from '../../services/order.service';
@@ -28,7 +29,8 @@ export class OrderDeleteComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { id: number },
     private orderService: OrderService,
     private toastService: ToastrService,
-    public dialogRef: MatDialogRef<OrderUpdateComponent>
+    public dialogRef: MatDialogRef<OrderUpdateComponent>,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +54,7 @@ export class OrderDeleteComponent implements OnInit {
       (res) => {
         this.toastService.success('Order deleted successfully', 'New Order');
         this.dialogRef.close();
-        location.reload();
+        this.reloadCurrentRoute();
       },
       (ex) => {
         this.toastService.error(ex.error.error);
@@ -62,5 +64,12 @@ export class OrderDeleteComponent implements OnInit {
 
   close(ev: any) {
     this.dialogRef.close();
+  }
+
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }

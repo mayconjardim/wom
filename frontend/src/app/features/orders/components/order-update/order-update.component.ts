@@ -7,6 +7,7 @@ import { User } from 'src/app/features/users/models/user';
 import { Order } from '../../models/order';
 import { UserService } from './../../../users/services/user.service';
 import { OrderService } from './../../services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'order-update',
@@ -64,7 +65,8 @@ export class OrderUpdateComponent implements OnInit {
     private orderService: OrderService,
     private userService: UserService,
     private toastService: ToastrService,
-    public dialogRef: MatDialogRef<OrderUpdateComponent>
+    public dialogRef: MatDialogRef<OrderUpdateComponent>,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -82,7 +84,7 @@ export class OrderUpdateComponent implements OnInit {
       (res) => {
         this.toastService.success('Order updated successfully', 'Update Order');
         this.dialogRef.close();
-        location.reload();
+        this.reloadCurrentRoute();
       },
       (ex) => {
         console.log(ex);
@@ -140,5 +142,12 @@ export class OrderUpdateComponent implements OnInit {
 
   close(ev: any) {
     this.dialogRef.close();
+  }
+
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }
