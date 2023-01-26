@@ -1,7 +1,9 @@
+import { UserCreateComponent } from './../user-create/user-create.component';
 import { Component, OnInit } from '@angular/core';
 
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'user-list',
@@ -15,7 +17,7 @@ export class UserListComponent implements OnInit {
   pageSize = 10;
   length!: number;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.findAllPageable(0, 10);
@@ -28,11 +30,15 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  openDialogCreate(): void {
+    this.dialog.open(UserCreateComponent);
+  }
+
   roleName(role: string) {
     if (role === 'ROLE_MANAGER') {
       return 'Project Manager';
     } else if (role === 'ROLE_YARD') {
       return 'Yard';
-    } else return 'Admin | ';
+    } else return 'Admin';
   }
 }

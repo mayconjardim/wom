@@ -1,1 +1,93 @@
-<p>user-create works!</p>
+<div class="container">
+  <form class="container-form">
+    <h1>Create New User</h1>
+
+    <div class="container-half-width">
+      <mat-form-field appearance="fill" class="input">
+        <mat-label>First name</mat-label>
+        <input
+          [(ngModel)]="user.firstName"
+          name="firstName"
+          [formControl]="firstName"
+          required
+          matInput
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input">
+        <mat-label>Last name</mat-label>
+        <input
+          [(ngModel)]="user.lastName"
+          name="lastName"
+          [formControl]="lastName"
+          required
+          matInput
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="container-full-width">
+      <section class="checkbox" [formGroup]="roles">
+        <mat-checkbox formControlName="admin">Admin</mat-checkbox>
+        <mat-checkbox formControlName="manager">Project Manager</mat-checkbox>
+        <mat-checkbox formControlName="yard">Yard</mat-checkbox>
+      </section>
+    </div>
+
+    <div class="container-full-width">
+      <mat-form-field appearance="fill" class="input-full">
+        <mat-label>Phone number</mat-label>
+        <input
+          [(ngModel)]="user.phoneNumber"
+          name="phoneNumber"
+          [formControl]="phoneNumber"
+          required
+          matInput
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="container-full-width">
+      <mat-form-field appearance="fill" class="input-full">
+        <mat-label>E-mail</mat-label>
+        <input
+          [(ngModel)]="user.email"
+          name="email"
+          [formControl]="email"
+          required
+          type="email"
+          matInput
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="container-full-width">
+      <mat-form-field appearance="fill" class="input-full">
+        <mat-label>Password</mat-label>
+        <input
+          [(ngModel)]="user.password"
+          name="password"
+          [formControl]="password"
+          required
+          type="password"
+          matInput
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="container-actions">
+      <a
+        mat-icon-button
+        color="primary"
+        [disabled]="!validForm()"
+        (click)="createOrder()"
+      >
+        <mat-icon>person_add</mat-icon>
+      </a>
+
+      <a mat-icon-button color="warn" (click)="close($event)">
+        <mat-icon>disabled_by_default</mat-icon>
+      </a>
+    </div>
+  </form>
+</div>

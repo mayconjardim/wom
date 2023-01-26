@@ -1,12 +1,12 @@
-import { Role } from './role';
 export interface User {
   id?: number;
   firstName: string;
   lastName: string;
-  name: string;
+  name?: string;
   email: string;
+  password?: string;
   phoneNumber: string;
-  roles: Role[];
+  roles: any[];
 }
 
 export interface Pagination {
