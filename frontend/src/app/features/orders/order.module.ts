@@ -14,7 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-import { OrderCreateComponent } from './components/order-create/order-create.component';
+import { OrderCreateComponent } from './components/orders-create/order-create.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { OrderUpdateComponent } from './components/order-update/order-update.component';
 import { OrderReadComponent } from './components/order-read/order-read.component';

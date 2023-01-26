@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Order } from '../../models/order';
 import { OrderService } from './../../services/order.service';
-import { OrderCreateComponent } from './../order-create/order-create.component';
+import { OrderCreateComponent } from '../orders-create/order-create.component';
 
 @Component({
   selector: 'order-list',

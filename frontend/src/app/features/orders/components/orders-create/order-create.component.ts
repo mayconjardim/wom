@@ -5,8 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/features/users/models/user';
 
 import { Order } from '../../models/order';
-import { UserService } from './../../../users/services/user.service';
-import { OrderService } from './../../services/order.service';
+import { UserService } from '../../../users/services/user.service';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'order-create',
