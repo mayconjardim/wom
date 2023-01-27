@@ -5,6 +5,7 @@ import { OrderService } from '../../services/order.service';
 import { ToastrService } from 'ngx-toastr';
 import { OrderUpdateComponent } from '../order-update/order-update.component';
 import { Order } from '../../models/order';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'order-delete',
@@ -50,16 +51,23 @@ export class OrderDeleteComponent implements OnInit {
   }
 
   deleteOrder(ev: any) {
-    this.orderService.delete(this.order.id).subscribe(
-      (res) => {
-        this.toastService.success('Order deleted successfully', 'New Order');
-        this.dialogRef.close();
-        this.reloadCurrentRoute();
-      },
-      (ex) => {
-        this.toastService.error(ex.error.error);
-      }
-    );
+    this.orderService
+      .delete(this.order.id)
+      .pipe(
+        tap((res) => {
+          this.toastService.success(
+            'Order deleted successfully',
+            'Delete Order'
+          );
+          this.dialogRef.close();
+          this.reloadCurrentRoute();
+        }),
+        catchError((err) => {
+          this.toastService.error(err.error.error);
+          return of(err);
+        })
+      )
+      .subscribe();
   }
 
   close(ev: any) {
