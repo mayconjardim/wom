@@ -14,6 +14,7 @@ import { Order } from '../../models/order';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { jsPDF } from 'jspdf';
 import domtoimage from 'dom-to-image';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'order-read',
@@ -51,14 +52,18 @@ export class OrderReadComponent implements OnInit {
   }
 
   findOrderById() {
-    this.orderService.findById(this.order.id).subscribe(
-      (resp) => {
-        this.order = resp;
-      },
-      (ex) => {
-        this.toastService.error(ex.error.error);
-      }
-    );
+    this.orderService
+      .findById(this.order.id)
+      .pipe(
+        tap((res) => {
+          this.order = res;
+        }),
+        catchError((err) => {
+          this.toastService.error(err.error.error);
+          return of(err);
+        })
+      )
+      .subscribe();
   }
 
   openPDF(): void {
