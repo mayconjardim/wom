@@ -5,6 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../models/user';
 import { ToastrService } from 'ngx-toastr';
 import { Route, Router } from '@angular/router';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'user-create',
@@ -56,16 +57,20 @@ export class UserCreateComponent implements OnInit {
       this.user.roles.push({ id: 3 });
     }
 
-    this.userService.create(this.user).subscribe(
-      (res) => {
-        this.toastService.success('User created successfully', 'New User');
-        this.dialogRef.close();
-        this.reloadCurrentRoute();
-      },
-      (ex) => {
-        this.toastService.error(ex.error.error);
-      }
-    );
+    this.userService
+      .create(this.user)
+      .pipe(
+        tap((res) => {
+          this.toastService.success('User created successfully', 'New User');
+          this.dialogRef.close();
+          this.reloadCurrentRoute();
+        }),
+        catchError((err) => {
+          this.toastService.error(err.error.error);
+          return of(err);
+        })
+      )
+      .subscribe();
   }
 
   validForm(): boolean {
