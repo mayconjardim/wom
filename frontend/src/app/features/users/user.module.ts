@@ -15,11 +15,12 @@ import { FormsModule } from '@angular/forms';
 
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 export const routes: Routes = [{ path: '', component: UserListComponent }];
 
 @NgModule({
-  declarations: [UserListComponent, UserCreateComponent],
+  declarations: [UserListComponent, UserCreateComponent, UserUpdateComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

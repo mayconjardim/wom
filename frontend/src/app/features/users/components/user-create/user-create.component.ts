@@ -1,11 +1,12 @@
-import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { User } from '../../models/user';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Route, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
+
+import { User } from '../../models/user';
+import { UserService } from './../../services/user.service';
 
 @Component({
   selector: 'user-create',
