@@ -8,6 +8,7 @@ import { Order } from '../../models/order';
 import { UserService } from './../../../users/services/user.service';
 import { OrderService } from './../../services/order.service';
 import { Router } from '@angular/router';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'order-update',
@@ -77,20 +78,34 @@ export class OrderUpdateComponent implements OnInit {
 
   debug() {
     console.log(this.order);
+    console.log(
+      'Yard id : ' + this.yard.id + ' / Manager id: ' + this.manager.id
+    );
   }
 
   updateOrder(ev: any) {
-    this.orderService.update(this.order).subscribe(
-      (res) => {
-        this.toastService.success('Order updated successfully', 'Update Order');
-        this.dialogRef.close();
-        this.reloadCurrentRoute();
-      },
-      (ex) => {
-        console.log(ex);
-        this.toastService.error(ex.error.error);
-      }
-    );
+    if (this.yard.id != null) {
+      this.order.users = [];
+      this.order.users.push({ id: this.manager.id }, { id: this.yard.id });
+    }
+
+    this.orderService
+      .update(this.order)
+      .pipe(
+        tap((res) => {
+          this.toastService.success(
+            'Order updated successfully',
+            'Update Order'
+          );
+          this.dialogRef.close();
+          this.reloadCurrentRoute();
+        }),
+        catchError((err) => {
+          this.toastService.error(err.error.error);
+          return of(err);
+        })
+      )
+      .subscribe();
   }
 
   findOrderById() {
