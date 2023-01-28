@@ -24,6 +24,10 @@ export class UserService {
     return this.http.get<User>(`${API_CONFIG.baseUrl}/users/${id}`);
   }
 
+  findByUpdateId(id: any): Observable<User> {
+    return this.http.get<User>(`${API_CONFIG.baseUrl}/users/update/${id}`);
+  }
+
   create(user: User): Observable<User> {
     return this.http.post<User>(`${API_CONFIG.baseUrl}/users`, user);
   }

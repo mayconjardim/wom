@@ -1,12 +1,18 @@
 package com.wom.api.dto;
 
+import com.wom.api.entities.User;
+
 public class UserInsertDTO extends UserDTO {
 	private static final long serialVersionUID = 1L;
 	
 	private String password;
 	
-	UserInsertDTO() {
+	public UserInsertDTO() {
 	super();	
+	}
+
+	public UserInsertDTO(User entity) {
+		password = entity.getPassword();
 	}
 
 	public String getPassword() {

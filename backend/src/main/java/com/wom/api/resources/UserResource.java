@@ -48,6 +48,12 @@ public class UserResource {
 		return ResponseEntity.ok().body(dto);
 	}
 
+	@GetMapping(value = "/update/{id}")
+	public ResponseEntity<UserInsertDTO> findByUpdateId(@PathVariable Long id) {
+		UserInsertDTO dto = userService.findByUpdateId(id);
+		return ResponseEntity.ok().body(dto);
+	}
+
 	@PostMapping
 	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) {
 		UserDTO newDto = userService.insert(dto);

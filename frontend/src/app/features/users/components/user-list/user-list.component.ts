@@ -1,3 +1,4 @@
+import { UserUpdateComponent } from './../user-update/user-update.component';
 import { UserCreateComponent } from './../user-create/user-create.component';
 import { Component, OnInit } from '@angular/core';
 
@@ -32,6 +33,12 @@ export class UserListComponent implements OnInit {
 
   openDialogCreate(): void {
     this.dialog.open(UserCreateComponent);
+  }
+
+  openDialogUpdate(id: number): void {
+    this.dialog.open(UserUpdateComponent, {
+      data: { id: id },
+    });
   }
 
   roleName(role: string) {

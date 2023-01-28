@@ -22,7 +22,13 @@
       <mat-divider></mat-divider>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-icon-button color="primary"><mat-icon>edit</mat-icon></button>
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="openDialogUpdate(user.id!)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
       <button mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
     </mat-card-actions>
   </mat-card>
