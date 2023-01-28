@@ -76,13 +76,6 @@ export class OrderUpdateComponent implements OnInit {
     this.findAllUsers();
   }
 
-  debug() {
-    console.log(this.order);
-    console.log(
-      'Yard id : ' + this.yard.id + ' / Manager id: ' + this.manager.id
-    );
-  }
-
   updateOrder(ev: any) {
     if (this.yard.id != null) {
       this.order.users = [];

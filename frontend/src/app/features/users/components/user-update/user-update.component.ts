@@ -9,11 +9,11 @@ import { User } from '../../models/user';
 import { UserService } from './../../services/user.service';
 
 @Component({
-  selector: 'ser-update',
+  selector: 'user-update',
   templateUrl: './user-update.component.html',
   styleUrls: ['./user-update.component.scss'],
 })
-export class UserUpdateComponent {
+export class UserUpdateComponent implements OnInit {
   user: User = {
     firstName: '',
     lastName: '',
@@ -45,14 +45,33 @@ export class UserUpdateComponent {
   ) {}
 
   ngOnInit(): void {
-    this.user.id = this.data.id;
     this.findByUpdateId();
   }
 
+  debug() {
+    console.log(this.user);
+  }
+
   findByUpdateId() {
-    this.userService.findById(this.user.id).subscribe(
+    this.userService.findByUpdateId(this.data.id).subscribe(
       (resp) => {
         this.user = resp;
+
+        let admin = this.user.roles.some((auth) =>
+          auth.authority.includes('ROLE_ADMIN')
+        );
+
+        let manager = this.user.roles.some((auth) =>
+          auth.authority.includes('ROLE_MANAGER')
+        );
+
+        let yard = this.user.roles.some((auth) =>
+          auth.authority.includes('ROLE_YARD')
+        );
+
+        this.roles.get('admin')?.setValue(admin);
+        this.roles.get('manager')?.setValue(manager);
+        this.roles.get('yard')?.setValue(yard);
       },
       (ex) => {
         this.toastService.error(ex.error.error);
@@ -61,23 +80,31 @@ export class UserUpdateComponent {
   }
 
   updateOrder() {
-    if (this.roles.get('admin')!.value == true) {
-      this.user.roles.push({ id: 1 });
-    }
+    this.user.id = this.data.id;
+    this.user.roles = [];
 
-    if (this.roles.get('manager')!.value == true) {
-      this.user.roles.push({ id: 2 });
-    }
+    const rolesToCheck = [
+      { name: 'admin', id: 1 },
+      { name: 'manager', id: 2 },
+      { name: 'yard', id: 3 },
+    ];
 
-    if (this.roles.get('yard')!.value == true) {
-      this.user.roles.push({ id: 3 });
-    }
+    rolesToCheck.forEach((roleToCheck) => {
+      const role = this.roles.get(roleToCheck.name);
+      if (role && role.value) {
+        this.user.roles.push({ id: roleToCheck.id });
+      } else {
+        this.user.roles = this.user.roles.filter(
+          (role) => role.id !== roleToCheck.id
+        );
+      }
+    });
 
     this.userService
       .update(this.user)
       .pipe(
         tap((res) => {
-          this.toastService.success('User created successfully', 'New User');
+          this.toastService.success('User updated successfully', 'Update User');
           this.dialogRef.close();
           this.reloadCurrentRoute();
         }),

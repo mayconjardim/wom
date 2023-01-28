@@ -1,6 +1,5 @@
 package com.wom.api.entities;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,7 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "Users")
-public class User implements UserDetails, Serializable {
+public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -72,7 +71,7 @@ public class User implements UserDetails, Serializable {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -84,7 +83,7 @@ public class User implements UserDetails, Serializable {
 	public String getName() {
 		return this.firstName + " " + this.lastName;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}

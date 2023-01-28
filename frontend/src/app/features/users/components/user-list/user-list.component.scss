@@ -13,7 +13,7 @@
   &-card {
     width: 23rem;
     margin: 0.5rem auto;
-    font-size: 14px;
+    font-size: 9px;
     mat-card-subtitle {
       margin: 0.2rem;
     }
@@ -26,9 +26,8 @@
 
 @media only screen and (min-width: 768px) {
   .container {
-    font-size: 12px;
-
     mat-card {
+      font-size: 12px;
       width: 18rem;
       margin: 0.5rem;
     }

@@ -29,18 +29,24 @@ public class JwtTokenEnhancer implements TokenEnhancer {
 		map.put("userId", user.getId());
 
 		String role = "";
-		String isAdmin = "false";
+		boolean isAdmin = false;
 
 		for (Role auth : user.getRoles()) {
-		    if (auth.getAuthority().contains("ROLE_MANAGER")) {
-		        role = "Manager";
-		        isAdmin = auth.getAuthority().contains("ROLE_ADMIN") ? "false" : "true";
-		        break;
-		    } else if (auth.getAuthority().contains("ROLE_YARD")) {
-		        role = "Yard";
-		        break;
-		    }
+
+			if (auth.getAuthority().contains("ROLE_MANAGER")) {
+				role = "Manager";
+			}
+
+			if (auth.getAuthority().contains("ROLE_YARD")) {
+				role = "Yard";
+			}
+
+			if (auth.getAuthority().contains("ROLE_ADMIN")) {
+				isAdmin = true;
+			}
+
 		}
+
 		map.put("role", role);
 		map.put("admin", isAdmin);
 

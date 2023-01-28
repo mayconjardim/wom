@@ -8,14 +8,18 @@
   <mat-card class="container-card mat-elevation-z6" *ngFor="let user of users">
     <mat-card-header>
       <mat-card-title
-        ><mat-icon color="primary">person </mat-icon> {{ user.name }} -
-        <span *ngFor="let role of user.roles">
-          {{ roleName(role.authority) }}
-        </span>
+        ><mat-icon color="primary">person </mat-icon> {{ user.name }}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <p>
+        <mat-icon color="primary">badge</mat-icon>
+        <span *ngFor="let role of user.roles">
+          {{ roleName(role.authority) }}.
+        </span>
+      </p>
       <p><mat-icon color="primary">mail</mat-icon> {{ user.email }}</p>
+
       <p>
         <mat-icon color="primary">phone_iphone</mat-icon> {{ user.phoneNumber }}
       </p>
