@@ -1,3 +1,4 @@
+import { UserDeleteComponent } from './../user-delete/user-delete.component';
 import { UserUpdateComponent } from './../user-update/user-update.component';
 import { UserCreateComponent } from './../user-create/user-create.component';
 import { Component, OnInit } from '@angular/core';
@@ -37,6 +38,12 @@ export class UserListComponent implements OnInit {
 
   openDialogUpdate(id: number): void {
     this.dialog.open(UserUpdateComponent, {
+      data: { id: id },
+    });
+  }
+
+  openDialogDelete(id: number): void {
+    this.dialog.open(UserDeleteComponent, {
       data: { id: id },
     });
   }
